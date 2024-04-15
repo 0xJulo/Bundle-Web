@@ -12,7 +12,7 @@ const Tabs: React.FC = () => {
   ];
 
   return (
-    <div className='w-full mb-8 '>
+    <div className='w-full mb-8'>
         <div>
             {tabs.map((tab, index) => (
                 <button 

@@ -16,7 +16,6 @@ const App: React.FC = () => {
             
             <SearchBar />
             <Tabs />
-            <BundleWidget />
             
             <div className="flex flex-col md:flex-row">
               <div className="md:w-1/2">
@@ -26,9 +25,9 @@ const App: React.FC = () => {
                 <BundleDetail />
               </div>
             </div>
-            
-            <Button />
+
             <h1>Example Bundles</h1>
+            <p>Just pulling data in here to see if it's working</p>
             <ul>
                 {bundles.map((bundle) => (
                   <React.Fragment key={bundle.id}>
