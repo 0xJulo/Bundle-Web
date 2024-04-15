@@ -37,7 +37,7 @@ const BundleDetail: React.FC = () => {
                 <div>
                     <div className='p-3'>
                         <p>{bundle.owner}</p>
-                        <h3>Start</h3>
+                        <h3>Start condition</h3>
                         <p>{bundle.trigger.title}</p>
                     </div>
 
@@ -56,7 +56,9 @@ const BundleDetail: React.FC = () => {
                         <h3>Actions</h3>
                         {bundle.actions.map((action, index) => (
                             <div key={index}>
-                                <p>{action.title} {action.type}</p>
+                                <p>
+                                    {action.title} {action.type}
+                                </p>
                                 <p>Source: {action.source}</p>
                             </div>
                         ))}
