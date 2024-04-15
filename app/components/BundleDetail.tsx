@@ -1,9 +1,10 @@
 'use client';
 import React, { useState } from 'react'; // Import useState from React
+import { useRouter } from 'next/router';
 
-// Icon imports
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import ExpandLess from '@mui/icons-material/ExpandLess';
+
+// Component imports
+import Button from './Button';
 
 // Data imports
 import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
@@ -11,30 +12,33 @@ import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
 const BundleDetail: React.FC = () => {
     const [isOpened, setOpened] = useState<boolean>(false);
     const bundle: Bundle = ExampleBundles[0];
+    // const router = useRouter();
 
     // Function to toggle the opened state
     const toggleOpen = () => setOpened(!isOpened);
 
+    // const handleRunBundle = (bundleId: number) => {
+    //     router.push(`/run-bundle/${bundleId}`);
+    // }
+
     return (
         
-        <div className='flex-col bg-[#EEECEC] my-4 rounded-[12px] border-[1px] border-[#D3D3D3]'>
-            <div className='bg-[#80BAA8] flex p-2 pl-3 rounded-t-[10px] font-semibold'>
+        <div className='flex-row bg-[#EEECEC] my-4 rounded-[12px] border-[1px] border-[#D3D3D3]'>
+            <div className='bg-gray-100 flex p-2 pl-3 rounded-t-[10px] font-semibold'>
                 <p>{bundle.type}</p>
             </div>
 
-            <div className='flex justify-between p-3'>
+            <div className='flex flex-col justify-between p-3'>
                 <div>
                     <h2 className='text-2xl font-semibold'>{bundle.name}</h2>
                     <p>{bundle.description}</p>
                 </div>
-                {isOpened ? (
-                    <ExpandLess onClick={toggleOpen} fontSize='large' />
-                ) : (
-                    <ExpandMore onClick={toggleOpen} fontSize='large' />
-                )}
+                <div className='mt-4'>
+                    <Button label='Run Bundle' onClick={() => {}} bundleId={bundle.id} />
+                </div>
             </div>
 
-            {isOpened && (
+            {/* {isOpened && (
                 <div>
                     <div className='p-3'>
                         <p>{bundle.owner}</p>
@@ -65,7 +69,7 @@ const BundleDetail: React.FC = () => {
                         ))}
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };
