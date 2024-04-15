@@ -34,8 +34,33 @@ const BundleDetail: React.FC = () => {
             </div>
 
             {isOpened && (
-                <div className='p-3'>
-                    <p>{bundle.owner}</p>
+                <div>
+                    <div className='p-3'>
+                        <p>{bundle.owner}</p>
+                        <h3>Start</h3>
+                        <p>{bundle.trigger.title}</p>
+                    </div>
+
+                    <div className='p-3'>
+                        <h3>Conditions</h3>
+                        {bundle.conditions.map((condition, index) => (
+                            <div key={index}>
+                                <p>{condition.title}</p>
+                                <p>Type: {condition.type}</p>
+                                <p>Source: {condition.source}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className='p-3'>
+                        <h3>Actions</h3>
+                        {bundle.actions.map((action, index) => (
+                            <div key={index}>
+                                <p>{action.title} {action.type}</p>
+                                <p>Source: {action.source}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

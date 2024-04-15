@@ -50,6 +50,12 @@ const ExampleBundles: Bundle[] = [
                 type: 'data',
                 source: 'chainlink',
             },
+            {
+                id: 2,
+                title: 'If',
+                type: 'price of ETH is greater than',
+                source: 'chainlink',
+            },
         ],
         actions: [
             {
