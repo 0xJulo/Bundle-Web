@@ -21,8 +21,15 @@ body {
   background: #FAFAFA;
 }
 
+main {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
+

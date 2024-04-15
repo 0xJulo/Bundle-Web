@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react'; // Import useState from React
 
-import AddIcon from '@mui/icons-material/Add';
+// Icon imports
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 
@@ -16,7 +16,7 @@ const BundleDetail: React.FC = () => {
     const toggleOpen = () => setOpened(!isOpened);
 
     return (
-        <div className='bg-[#EEECEC] my-4 rounded-[12px] mx-2 border-[1px] border-[#D3D3D3]'>
+        <div className='bg-[#EEECEC] my-4 rounded-[12px] border-[1px] border-[#D3D3D3]'>
             <div className='bg-[#80BAA8] flex p-2 pl-3 rounded-t-[10px] font-semibold'>
                 <p>{bundle.type}</p>
             </div>

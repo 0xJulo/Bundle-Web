@@ -4,6 +4,7 @@ import ExampleBundles, { Bundle } from './utils/ExampleDataStore';
 // Component imports
 import BundleWidget from './components/BundleWidget';
 import BundleDetail from './components/BundleDetail';
+import Button from './components/Button';
 
 const App: React.FC = () => {
   const bundles: Bundle[] = ExampleBundles;
@@ -20,6 +21,7 @@ const App: React.FC = () => {
             </ul>
             <BundleWidget />
             <BundleDetail />
+            <Button />
         </div>
     );
 };
