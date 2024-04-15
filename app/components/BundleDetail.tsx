@@ -16,7 +16,8 @@ const BundleDetail: React.FC = () => {
     const toggleOpen = () => setOpened(!isOpened);
 
     return (
-        <div className='bg-[#EEECEC] my-4 rounded-[12px] border-[1px] border-[#D3D3D3]'>
+        
+        <div className='flex-col bg-[#EEECEC] my-4 rounded-[12px] border-[1px] border-[#D3D3D3]'>
             <div className='bg-[#80BAA8] flex p-2 pl-3 rounded-t-[10px] font-semibold'>
                 <p>{bundle.type}</p>
             </div>

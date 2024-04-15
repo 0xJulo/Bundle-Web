@@ -5,11 +5,29 @@ import ExampleBundles, { Bundle } from './utils/ExampleDataStore';
 import BundleWidget from './components/BundleWidget';
 import BundleDetail from './components/BundleDetail';
 import Button from './components/Button';
+import SearchBar from './components/SearchBar';
+import Tabs from './components/Tabs';
+import CreateBundleButton from './components/CreateBundleButton';
 
 const App: React.FC = () => {
   const bundles: Bundle[] = ExampleBundles;
     return (
         <div>
+            
+            <SearchBar />
+            <Tabs />
+            <BundleWidget />
+            
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-1/2">
+                <BundleDetail />
+              </div>
+              <div className="md:w-1/2">
+                <BundleDetail />
+              </div>
+            </div>
+            
+            <Button />
             <h1>Example Bundles</h1>
             <ul>
                 {bundles.map((bundle) => (
@@ -19,9 +37,7 @@ const App: React.FC = () => {
                   </React.Fragment>
                 ))}
             </ul>
-            <BundleWidget />
-            <BundleDetail />
-            <Button />
+            <CreateBundleButton />
         </div>
     );
 };

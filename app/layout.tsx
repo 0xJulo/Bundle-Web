@@ -22,7 +22,7 @@ export default function RootLayout({
         <Header />
         <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
           <SideMenu />
-          <main style={{ flexGrow: 1 }}>{children}</main>
+          <main style={{ flexGrow: 1, marginTop: '80px' }}>{children}</main>
         </div>
       </body>
     </html>

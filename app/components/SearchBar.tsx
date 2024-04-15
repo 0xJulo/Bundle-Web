@@ -10,7 +10,7 @@ const SearchBar: React.FC = () => {
     console.log(query);
   }
   return (
-    <form className="w-full mb-5">
+    <form className="w-full mb-8 md:mb-5">
       <div className='relative w-full'>
           <input 
             className="w-full h-12 pl-3 pr-10 py-2 rounded border"
