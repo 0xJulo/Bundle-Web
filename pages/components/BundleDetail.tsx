@@ -9,13 +9,17 @@ import Button from './Button';
 // Data imports
 import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
 
-const BundleDetail: React.FC = () => {
+interface BundleDetailProps {
+    bundle: Bundle;
+}
+
+const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
-    const bundle: Bundle = ExampleBundles[0];
+    // const bundle: Bundle = ExampleBundles[0];
     // const router = useRouter();
 
     // Function to toggle the opened state
-    const toggleOpen = () => setOpened(!isOpened);
+    //const toggleOpen = () => setOpened(!isOpened);
 
     // const handleRunBundle = (bundleId: number) => {
     //     router.push(`/run-bundle/${bundleId}`);

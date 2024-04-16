@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
 
@@ -9,24 +9,26 @@ import Tabs from '../components/Tabs';
 import CreateBundleButton from '../components/CreateBundleButton';
 
 interface DashboardPageProps {
-  handleCreateNewBundle: () => void;
+    handleCreateNewBundle: () => void;
 }
-const DashboardPage: React.FC<DashboardPageProps> = ({ handleCreateNewBundle }) => {
-  const bundles: Bundle[] = ExampleBundles;
-  
+const DashboardPage: React.FC<DashboardPageProps> = ({
+    handleCreateNewBundle,
+}) => {
+    const bundles: Bundle[] = ExampleBundles;
+
     return (
-        <div>
+        <section className='h-[100vh] mx-4 mt-24 md:mx-10 md:mt-24'>
             <SearchBar />
             <Tabs />
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/2">
-                <BundleDetail />
-              </div>
-              <div className="md:w-1/2">
-                <BundleDetail />
-              </div>
-            </div>
-            <h1>Example Bundles</h1>
+            {/* <div className='flex flex-col md:flex-row'>
+                <div className='md:w-1/2'>
+                    <BundleDetail />
+                </div>
+                <div className='md:w-1/2'>
+                    <BundleDetail />
+                </div>
+            </div> */}
+            {/* <h1>Example Bundles</h1>
             <p>Just pulling data in here to see if it's working</p>
             <ul>
                 {bundles.map((bundle) => (
@@ -35,9 +37,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ handleCreateNewBundle }) 
                     <p>{bundle.description}</p>
                   </React.Fragment>
                 ))}
-            </ul>
+            </ul> */}
             <CreateBundleButton handleCreateNewBundle={handleCreateNewBundle} />
-        </div>
+        </section>
     );
 };
 

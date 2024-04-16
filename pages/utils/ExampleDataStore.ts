@@ -1,5 +1,13 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+
+export interface CreateNFT {
+    network: string
+    name: string;
+    description: string;
+    image: string;
+}
+
 // Bundle data shape
 export interface Bundle {
     id: number;
@@ -189,11 +197,12 @@ const ExampleBundles: Bundle[] = [
     },
     {
         id: 6,
-        name: 'Create something else',
-        type: 'Popular',
+        name: 'Create NFT and deploy to chain of your choice',
+        type: 'Pre-defined',
         created: 'Bundle',
         owner: 'Julo.eth',
-        description: 'Just create whatever you want',
+        description:
+            'Upload assets to NFT contracts in a simple way and mint it to whatever network you choose',
         tags: ['NFT', 'Art', 'Music'],
         trigger: {
             title: 'Start by...',
