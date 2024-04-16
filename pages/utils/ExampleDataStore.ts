@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-
 export interface CreateNFT {
-    network: string
+    network: string;
     name: string;
     description: string;
     image: string;
@@ -167,37 +166,6 @@ const ExampleBundles: Bundle[] = [
     },
     {
         id: 5,
-        name: 'Create NFT and deploy to chain',
-        type: 'Pre-defined',
-        created: 'Bundle',
-        owner: 'Julo.eth',
-        description:
-            'Quickly create an NFT and deploy it to the chain of your choice',
-        tags: ['NFT', 'Art', 'Music'],
-        trigger: {
-            title: 'Start by...',
-            type: 'internal',
-            input: 'wallet',
-        },
-        conditions: [
-            {
-                id: 1,
-                title: 'Check for...',
-                type: 'data',
-                source: 'chainlink',
-            },
-        ],
-        actions: [
-            {
-                id: 1,
-                title: 'Send a...',
-                type: 'transaction',
-                source: 'external',
-            },
-        ],
-    },
-    {
-        id: 6,
         name: 'Create single NFT and deploy to chain of your choice',
         type: 'Pre-defined',
         created: 'Bundle',
@@ -226,7 +194,7 @@ const ExampleBundles: Bundle[] = [
                 source: 'external',
             },
         ],
-        route: '/create-nft',
+        route: '/screens/CreateNFTPage',
     },
 ];
 

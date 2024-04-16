@@ -2,7 +2,6 @@
 import React, { useState } from 'react'; // Import useState from React
 import { useRouter } from 'next/router';
 
-
 // Component imports
 import Button from './Button';
 
@@ -22,11 +21,15 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
     //const toggleOpen = () => setOpened(!isOpened);
 
     const handleRunBundle = () => {
-        router.push(`/screens/CreateNFTPage`);
-    }
+        // Check if bundle.route is defined and not an empty string
+        if (bundle.route && bundle.route.trim() !== '') {
+            // Use bundle.route for navigation
+            router.push(bundle.route);
+        }
+        // If bundle.route is not defined or is an empty string, do nothing (don't navigate)
+    };
 
     return (
-        
         <div className='flex-row bg-[#EEECEC] my-4 rounded-[12px] border-[1px] border-[#D3D3D3]'>
             <div className='bg-gray-100 flex p-2 pl-3 rounded-t-[10px] font-semibold'>
                 <p>{bundle.type}</p>
@@ -35,10 +38,14 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
             <div className='flex flex-col justify-between p-3'>
                 <div>
                     <h2 className='text-2xl font-semibold'>{bundle.name}</h2>
-                    <p>{bundle.description}</p>
+                    <p className=' w-[95%]'>{bundle.description}</p>
                 </div>
                 <div className='mt-4'>
-                    <Button label='Run Bundle' onClick={handleRunBundle} bundleId={bundle.id} />
+                    <Button
+                        label='Run Bundle'
+                        onClick={handleRunBundle}
+                        bundleId={bundle.id}
+                    />
                 </div>
             </div>
         </div>
@@ -47,10 +54,8 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
 
 export default BundleDetail;
 
-
-
-
-{/* {isOpened && (
+{
+    /* {isOpened && (
                 <div>
                     <div className='p-3'>
                         <p>{bundle.owner}</p>
@@ -81,4 +86,5 @@ export default BundleDetail;
                         ))}
                     </div>
                 </div>
-            )} */}
+            )} */
+}
