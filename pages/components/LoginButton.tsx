@@ -4,12 +4,41 @@ import React from "react";
 import Wallet from "@mui/icons-material/Wallet";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-const Button: React.FC = () => {
+const LoginButton: React.FC = () => {
   return (
-    <div className="flex items-center gap-2 bg-[#80BAA8] rounded-[10px] p-2 pl-3">
-      <ConnectButton />
+    <div className="">
+       <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openConnectModal,
+        mounted,
+      }) => {
+        // Ensure the button is only shown when mounted to avoid SSR issues
+        if (!mounted) {
+          return null;
+        }
+
+        return (
+          <button
+            onClick={openConnectModal}
+            type="button"
+            style={{
+              backgroundColor: '#80BAA8', // Change this color to your preference
+              color: 'white',
+              padding: '10px 20px',
+              borderRadius: '20px',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Connect Wallet
+          </button>
+        );
+      }}
+    </ConnectButton.Custom>
     </div>
   );
 };
 
-export default Button;
+export default LoginButton;

@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+export interface CreateNFT {
+    network: string;
+    name: string;
+    description: string;
+    image: string;
+}
+
 // Bundle data shape
 export interface Bundle {
     id: number;
@@ -26,6 +33,7 @@ export interface Bundle {
         type: string;
         source: string;
     }>;
+    route?: string;
 }
 
 // Example data for bundles
@@ -158,12 +166,12 @@ const ExampleBundles: Bundle[] = [
     },
     {
         id: 5,
-        name: 'Create NFT and deploy to chain',
+        name: 'Create single NFT and deploy to chain of your choice',
         type: 'Pre-defined',
         created: 'Bundle',
         owner: 'Julo.eth',
         description:
-            'Quickly create an NFT and deploy it to the chain of your choice',
+            'Mint a singular NFT asset (ERC-721) to the network of your choice, initially setting ownership to your own wallet.',
         tags: ['NFT', 'Art', 'Music'],
         trigger: {
             title: 'Start by...',
@@ -186,36 +194,7 @@ const ExampleBundles: Bundle[] = [
                 source: 'external',
             },
         ],
-    },
-    {
-        id: 6,
-        name: 'Create something else',
-        type: 'Popular',
-        created: 'Bundle',
-        owner: 'Julo.eth',
-        description: 'Just create whatever you want',
-        tags: ['NFT', 'Art', 'Music'],
-        trigger: {
-            title: 'Start by...',
-            type: 'internal',
-            input: 'wallet',
-        },
-        conditions: [
-            {
-                id: 1,
-                title: 'Check for...',
-                type: 'data',
-                source: 'chainlink',
-            },
-        ],
-        actions: [
-            {
-                id: 1,
-                title: 'Send a...',
-                type: 'transaction',
-                source: 'external',
-            },
-        ],
+        route: '/screens/CreateNFTPage',
     },
 ];
 

@@ -8,9 +8,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, bundleId }) => {
   return (
-    <div className='flex items-center gap-2 bg-[#80BAA8] rounded-[10px] p-2 pl-3'>
-        <button onClick={() => onClick(bundleId)}>{label}</button>
-    </div>
+      <button className='bundle-primary-button' onClick={() => onClick(bundleId)}>{label}</button>
   ); 
 };
 
