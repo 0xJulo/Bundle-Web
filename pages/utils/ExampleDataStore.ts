@@ -77,11 +77,11 @@ const ExampleBundles: Bundle[] = [
     },
     {
         id: 2,
-        name: 'Bridge to Gnosis Pay',
+        name: 'Bridge to Gnosis Pay from other network',
         type: 'Saved',
         created: 'Bundle',
         owner: 'Julo.eth',
-        description: 'Take assets and bridge to Gnosis',
+        description: 'Take assets from another chain and bridge to Gnosis to get funds on Gnosis Pay account',
         tags: ['NFT', 'Art', 'Music'],
         trigger: {
             title: 'Start by...',
@@ -104,6 +104,7 @@ const ExampleBundles: Bundle[] = [
                 source: 'external',
             },
         ],
+        route: '/screens/BridgeArbGnosisPage',
     },
     {
         id: 3,
