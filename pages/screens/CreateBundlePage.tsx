@@ -36,7 +36,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                             className='mb-3 mr-2'
                         />
                         <label htmlFor='fast' className='text-lg'>I want to use a wallet to start my bundle</label>
-                        <p>This option will allow you to check a wallet for assets or simply send a transaction</p>
+                        <p>This option will allow you to check a wallet for assets or simply send a transaction. You may use your own wallet or base your actions on someone elses</p>
                     </div>
                     <div className='mt-4'>
                         <input
@@ -57,6 +57,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                 <div>
                     <h3 className='mb-3 bundle-text'>Condition</h3>
                     <p>A condition is optional and may be used to check things like price, volume, or transactions.</p>
+                    <p>You may use "and / or" type behaviour in your conditions, but all conditions must pass in order for action to be taken.</p>
                     <p className='font-bold'>Dev Notes - this could be conditional depending on choices previously</p>
                     <div className='mt-4'>
                         <input
