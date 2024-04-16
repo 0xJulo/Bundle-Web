@@ -53,6 +53,14 @@ const CreateNFTPage: React.FC<CreateNFTScreenProps> = ({ handleCreateNFT }) => {
                         </h2>
                         <p>{createNFTBundle.description}</p>
                     </div>
+                    <div className='mb-8'>
+                        <a 
+                            href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol" 
+                            target="_blank" rel="noopener noreferrer" 
+                            className='text-blue-500 hover:text-blue-700 underline'>
+                            View OpenZeppelin ERC721 Contract (opens in new tab)
+                        </a>
+                    </div>
 
                     {/* Form for creating the NFT */}
                     <form onSubmit={handleSubmit} className='md:w-1/2'>
