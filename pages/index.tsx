@@ -23,20 +23,20 @@ const Home: NextPage = () => {
   };
     return (
         <>
-            {/* {newBundle ? (
+            {newBundle ? (
                 <CreateBundlePage
                     handleCreateNewBundle={handleCreateNewBundle}
                 />
             ) : (
                 <DashboardPage handleCreateNewBundle={handleCreateNewBundle} />
-            )} */}
-            {createNFT ? (
+            )}
+            {/* {createNFT ? (
                 <CreateNFTPage
                     handleCreateNFT={handleCreateNFT}
                 />
             ) : (
                 <DashboardPage handleCreateNewBundle={handleCreateNewBundle} />
-            )}
+            )} */}
         </>
     );
 };

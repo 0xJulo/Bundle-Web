@@ -16,14 +16,14 @@ interface BundleDetailProps {
 const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
     const [isOpened, setOpened] = useState<boolean>(false);
     // const bundle: Bundle = ExampleBundles[0];
-    // const router = useRouter();
+    const router = useRouter();
 
     // Function to toggle the opened state
     //const toggleOpen = () => setOpened(!isOpened);
 
-    // const handleRunBundle = (bundleId: number) => {
-    //     router.push(`/run-bundle/${bundleId}`);
-    // }
+    const handleRunBundle = () => {
+        router.push(`/screens/CreateNFTPage`);
+    }
 
     return (
         
@@ -38,11 +38,19 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
                     <p>{bundle.description}</p>
                 </div>
                 <div className='mt-4'>
-                    <Button label='Run Bundle' onClick={() => {}} bundleId={bundle.id} />
+                    <Button label='Run Bundle' onClick={handleRunBundle} bundleId={bundle.id} />
                 </div>
             </div>
+        </div>
+    );
+};
 
-            {/* {isOpened && (
+export default BundleDetail;
+
+
+
+
+{/* {isOpened && (
                 <div>
                     <div className='p-3'>
                         <p>{bundle.owner}</p>
@@ -74,8 +82,3 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
                     </div>
                 </div>
             )} */}
-        </div>
-    );
-};
-
-export default BundleDetail;

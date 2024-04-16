@@ -34,6 +34,7 @@ export interface Bundle {
         type: string;
         source: string;
     }>;
+    route?: string;
 }
 
 // Example data for bundles
@@ -197,12 +198,12 @@ const ExampleBundles: Bundle[] = [
     },
     {
         id: 6,
-        name: 'Create NFT and deploy to chain of your choice',
+        name: 'Create single NFT and deploy to chain of your choice',
         type: 'Pre-defined',
         created: 'Bundle',
         owner: 'Julo.eth',
         description:
-            'Upload assets to NFT contracts in a simple way and mint it to whatever network you choose',
+            'Mint a singular NFT asset (ERC-721) to the network of your choice, initially setting ownership to your own wallet.',
         tags: ['NFT', 'Art', 'Music'],
         trigger: {
             title: 'Start by...',
@@ -225,6 +226,7 @@ const ExampleBundles: Bundle[] = [
                 source: 'external',
             },
         ],
+        route: '/create-nft',
     },
 ];
 

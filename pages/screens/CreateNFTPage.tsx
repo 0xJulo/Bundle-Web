@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import ExampleBundles from '../utils/ExampleDataStore';
 import { createNFT } from '../utils/CreateNFT';
+
 
 // You'll remove this eventually and create a go back
 interface CreateNFTScreenProps {
@@ -11,6 +13,13 @@ const CreateNFTPage: React.FC<CreateNFTScreenProps> = ({ handleCreateNFT }) => {
     const [network, setNetwork] = useState<string>('');
     const [name, setName] = useState<string>('');
     const examplePrice = "0.78ETH";
+
+    const router = useRouter();
+
+    const goBack = () => {
+        router.back();
+    }
+
     // Function to get the bundle name for Creating an NFT
     // This will return the same heading and description etc.
     const createNFTBundle = ExampleBundles.find(
@@ -35,7 +44,7 @@ const CreateNFTPage: React.FC<CreateNFTScreenProps> = ({ handleCreateNFT }) => {
 
     return (
         <section className='h-[100vh] mx-4 mt-24 md:mx-10 md:mt-24'>
-            <button onClick={handleCreateNFT}>close</button>
+            <button onClick={goBack}>close</button>
             {createNFTBundle && (
                 <>
                     <div className='mb-8 mt-6'>
