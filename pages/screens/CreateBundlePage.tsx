@@ -15,6 +15,8 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
   handleCreateNewBundle,
 }) => {
   const router = useRouter();
+  const [evidence, setEvidence] = React.useState<any>("");
+  const [ipfsLoading, setIpfsLoading] = React.useState<boolean>(false);
 
   const { data: hash, error, isPending, writeContract } = useWriteContract();
 
@@ -23,12 +25,46 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       hash,
     });
 
+  const pinBundle = async () => {
+    setIpfsLoading(true);
+    const data = {
+      bundleId: "02",
+      description: "this is a new bundle",
+      condition: "price-monitoring",
+      action: "swap-token",
+    };
+
+    try {
+      const response = await fetch("/api/pinToPinata", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      setEvidence(
+        `https://sapphire-living-peafowl-558.mypinata.cloud/ipfs/${result.IpfsHash}`
+      );
+      console.log("Pinned data:", result.IpfsHash);
+      setIpfsLoading(false);
+    } catch (error) {
+      console.error("Error pinning data to Pinata:", error);
+      setIpfsLoading(false);
+    }
+  };
+
   const createBundle = () => {
     writeContract({
       address: "0xb7403174d3325C3aD6B4576E10F85c2b63e68cF8",
       abi,
       functionName: "safeMint",
-      args: ["this is a testing"],
+      args: [evidence],
     });
   };
 
@@ -203,11 +239,19 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
 
       <button
         type="button"
-        onClick={createBundle}
+        onClick={() => {
+          pinBundle()
+            .then(() => {
+              createBundle();
+            })
+            .catch((error) => {
+              console.error("Error in pinBundle:", error);
+            });
+        }}
         disabled={isPending}
         className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        {isPending ? "Creating..." : "Create Bundle"}
+        {ipfsLoading || isPending ? "Creating..." : "Create Bundle"}
       </button>
       {hash && <div>Transaction Hash: {hash}</div>}
       {isConfirming && <div>Waiting for confirmation...</div>}
