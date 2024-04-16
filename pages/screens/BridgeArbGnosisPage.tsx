@@ -177,7 +177,7 @@ const CreateUniswapSwapPage: React.FC<CreateNFTScreenProps> = ({ handleCreateNFT
                             type='submit'
                             className='mt-4 mb-12 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700'
                         >
-                            Create Bundle
+                            Run Bundle
                         </button>
                     </form>
                 </>
