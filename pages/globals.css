@@ -47,6 +47,9 @@ main {
     .bundle-text {
         @apply text-lg md:text-2xl font-semibold text-gray-800;
     }
+    .bundle-text-smaller {
+        @apply text-lg md:text-xl font-semibold text-gray-800;
+    }
     .bundle-primary-button {
         @apply flex w-full items-center gap-2 text-white bg-[#80BAA8] rounded-[8px] p-3;
         @apply hover:bg-[#569B86];

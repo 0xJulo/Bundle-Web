@@ -40,11 +40,11 @@ export interface Bundle {
 const ExampleBundles: Bundle[] = [
     {
         id: 1,
-        name: 'Swap ETH to USDC',
+        name: 'Swap asset on Uniswap when price is reached',
         type: 'My Bundles',
         created: 'Bundle',
         owner: 'Julo.eth',
-        description: 'Take shit and swap from ETH to USDC on Uniswap',
+        description: 'Set a condition for a price to be reached and swap assets from your wallet',
         tags: ['NFT', 'Art', 'Music'],
         trigger: {
             title: 'Start by...',
@@ -73,6 +73,7 @@ const ExampleBundles: Bundle[] = [
                 source: 'external',
             },
         ],
+        route: '/screens/CreateUniswapSwapPage',
     },
     {
         id: 2,
