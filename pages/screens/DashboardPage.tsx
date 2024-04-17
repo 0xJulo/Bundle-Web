@@ -5,7 +5,7 @@ import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
 // Component imports
 import BundleDetail from '../components/BundleDetail';
 import SearchBar from '../components/SearchBar';
-import Tabs from '../components/Tabs';
+import Tabs from '../components/DashboardTabs';
 import CreateBundleButton from '../components/CreateBundleButton';
 
 interface DashboardPageProps {
