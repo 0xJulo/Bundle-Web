@@ -1,6 +1,6 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
-import ExampleBundles, { BundlesContext } from './utils/ExampleDataStore';
+import { BundlesProvider } from './utils/ExampleDataStore';
 import './globals.css';
 import SideMenu from './components/SideMenu';
 import Header from './components/Header';
@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <WagmiProvider config={config}>
             <QueryClientProvider client={client}>
                 <RainbowKitProvider>
-                    <BundlesContext.Provider value={ExampleBundles}>
+                    <BundlesProvider>
                         <Header />
                         <div className='flex'>
                             <SideMenu />
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                                 <Component {...pageProps} />
                             </div>
                         </div>
-                    </BundlesContext.Provider>
+                    </BundlesProvider>
                 </RainbowKitProvider>
             </QueryClientProvider>
         </WagmiProvider>
