@@ -6,7 +6,9 @@ import {
     type BaseError,
 } from 'wagmi';
 import abi from '../utils/Bundle.abi.json';
+import { Bundle } from '../utils/ExampleDataStore';
 
+// Component imports
 import ConditionTabs from '../components/ConditionsTabs';
 import ActionTabs from '../components/ActionTabs';
 
@@ -14,6 +16,7 @@ interface CreateBundleScreenProps {
     handleCreateNewBundle: () => void;
 }
 
+// Actual component
 const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
     handleCreateNewBundle,
 }) => {
@@ -22,6 +25,13 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
     const [ipfsLoading, setIpfsLoading] = React.useState<boolean>(false);
     const [isCondition, setIsCondition] = React.useState<boolean>(false);
     const conditionRef = React.useRef(null);
+
+    // State for bundle items
+    const [bundleName, setBundleName] = React.useState<string>('');
+    const [bundleDescription, setBundleDescription] =
+        React.useState<string>('');
+    const [conditionName, setConditionName] = React.useState<string>('');
+    const [actionName, setActionName] = React.useState<string>('');
 
     const { data: hash, error, isPending, writeContract } = useWriteContract();
 
@@ -73,6 +83,50 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
         });
     };
 
+    {
+        /* Bundle object and write to store */
+    }
+    const handleConditionNameChange = (name: string) => {
+        setConditionName(name);
+    };
+    const handleActionNameChange = (name: string) => {
+        setActionName(name);
+    };
+    const handleCreateBundle = (): Bundle => {
+        // Bundle object constructor
+        const newBundle: Bundle = {
+            id: 7, // Need to generate random id
+            name: bundleName,
+            type: 'My Bundles',
+            createdBy: 'You', // need to get wallet address here
+            description: bundleDescription,
+            conditions: [
+                {
+                    id: 1, // ID within the conditions array
+                    title: conditionName,
+                    status: false,
+                    source: 'Your Condition Source',
+                },
+                // Add more conditions as needed
+            ],
+            actions: [
+                {
+                    id: 1, // ID within the actions array
+                    title: actionName,
+                    type: 'Your Action Type',
+                    source: 'Your Action Source',
+                },
+                // Add more actions as needed
+            ],
+            // route is optional, include it if needed
+            route: '/your/route/here',
+        };
+        return newBundle;
+    };
+    {
+        /* Bundle object and write to store */
+    }
+
     const uncheckCondition = () => {
         if (conditionRef.current) {
             (conditionRef.current as HTMLInputElement).checked = false;
@@ -111,6 +165,8 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                                 type='text'
                                 name='bundleName'
                                 id='bundleName'
+                                value={bundleName}
+                                onChange={(e) => setBundleName(e.target.value)}
                                 className='mt-2 md:mt-4 block w-full h-12 p-2 rounded-md border-[#80BAA8] border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                                 placeholder='Enter your bundle name'
                             />
@@ -127,6 +183,10 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                                 id='bundleDescription'
                                 name='bundleDescription'
                                 rows={4}
+                                value={bundleDescription}
+                                onChange={(e) =>
+                                    setBundleDescription(e.target.value)
+                                }
                                 className='mt-2 md:mt-4 block w-full p-2 rounded-md border-[#80BAA8] border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
                                 placeholder='Describe your bundle'
                             ></textarea>
@@ -172,7 +232,11 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                         {isCondition && (
                             <>
                                 <div>
-                                    <ConditionTabs />
+                                    <ConditionTabs
+                                        onConditionNameChange={
+                                            handleConditionNameChange
+                                        }
+                                    />
                                 </div>
                                 <div className='flex space-x-4 mt-4'>
                                     <button
@@ -198,7 +262,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                 <div id='action'>
                     <h3 className='mb-3 bundle-text'>Action</h3>
                     <p>A trigger is how you will start your bundle</p>
-                    <ActionTabs />
+                    <ActionTabs onActionNameChange={handleActionNameChange} />
                     <button
                         disabled
                         className='bg-gray-200 text-gray-400 font-bold py-2 px-4 rounded'
@@ -235,6 +299,17 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                     Error: {(error as BaseError).shortMessage || error.message}
                 </div>
             )}
+            <hr className='my-8' />
+            <div className='py-12'>
+                <h2>Constructor Details</h2>
+                <p>id: need to sort generating unique ids</p>
+                <p>Bundle name: {bundleName}</p>
+                <p>Type: My Bundles</p>
+                <p>Created by: You - need to sort getting user wallet</p>
+                <p>Bundle description: {bundleDescription}</p>
+                <p>Condition: {conditionName}</p>
+                <p>Action: {actionName}</p>
+            </div>
         </section>
     );
 };

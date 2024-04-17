@@ -3,13 +3,17 @@ import React, { useState } from 'react';
 import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
 import BundleDetail from './BundleDetail';
 
-const ConditionsTabs: React.FC = () => {
+const ConditionsTabs: React.FC<{ onConditionNameChange: (name: string) => void }> = ({ onConditionNameChange }) => {
     const [activeTab, setActiveTab] = useState(0);
 
     const tabs = [
         { label: 'Check data source (ChainLink)' },
         { label: 'Check wallet' },
     ];
+
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onConditionNameChange(e.target.value);
+    }
 
     return (
         <div className='w-full mb-8 mt-6'>
@@ -36,13 +40,14 @@ const ConditionsTabs: React.FC = () => {
                     >
                         <input
                             type='radio'
-                            id='condition'
-                            name='condition'
-                            value='condition'
+                            id='uniswapCompare'
+                            name='uniswapCompare'
+                            value='uniswapCompare'
                             className='mb-3 mr-2 h-5 w-5'
+                            onChange={handleNameChange}
                         />
                         <label
-                            htmlFor='condition'
+                            htmlFor='uniswapCompare'
                             className='bundle-text-smaller'
                         >
                             Compare the price of two assets on Uniswap

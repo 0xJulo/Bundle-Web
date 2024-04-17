@@ -12,19 +12,13 @@ export interface Bundle {
     id: number;
     name: string;
     type: string;
-    created: string;
-    owner: string;
+    createdBy: string;
     description: string;
     tags?: string[];
-    trigger: {
-        title: string;
-        type: string;
-        input: string;
-    };
     conditions: Array<{
         id: number;
         title: string;
-        type: string;
+        status: boolean;
         source: string;
     }>;
     actions: Array<{
@@ -42,26 +36,20 @@ const ExampleBundles: Bundle[] = [
         id: 1,
         name: 'Swap asset on Uniswap when price is reached',
         type: 'My Bundles',
-        created: 'Bundle',
-        owner: 'Julo.eth',
+        createdBy: 'Bundle',
         description: 'Set a condition for a price to be reached and swap assets from your wallet',
         tags: ['NFT', 'Art', 'Music'],
-        trigger: {
-            title: 'Start by...',
-            type: 'internal',
-            input: 'wallet',
-        },
         conditions: [
             {
                 id: 1,
                 title: 'Check for...',
-                type: 'data',
+                status: false,
                 source: 'chainlink',
             },
             {
                 id: 2,
                 title: 'If',
-                type: 'price of ETH is greater than',
+                status: false,
                 source: 'chainlink',
             },
         ],
@@ -79,20 +67,14 @@ const ExampleBundles: Bundle[] = [
         id: 2,
         name: 'Bridge to Gnosis Pay from other network',
         type: 'Saved',
-        created: 'Bundle',
-        owner: 'Julo.eth',
+        createdBy: 'Bundle',
         description: 'Take assets from another chain and bridge to Gnosis to get funds on Gnosis Pay account',
         tags: ['NFT', 'Art', 'Music'],
-        trigger: {
-            title: 'Start by...',
-            type: 'internal',
-            input: 'wallet',
-        },
         conditions: [
             {
                 id: 1,
                 title: 'Check for...',
-                type: 'data',
+                status: false,
                 source: 'chainlink',
             },
         ],
@@ -110,20 +92,14 @@ const ExampleBundles: Bundle[] = [
         id: 3,
         name: 'Create Woop Fundraiser',
         type: 'Saved',
-        created: 'Bundle',
-        owner: 'Julo.eth',
+        createdBy: 'Bundle',
         description: 'Use Woop pay to create a fundraier',
         tags: ['NFT', 'Art', 'Music'],
-        trigger: {
-            title: 'Start by...',
-            type: 'internal',
-            input: 'wallet',
-        },
         conditions: [
             {
                 id: 1,
                 title: 'Check for...',
-                type: 'data',
+                status: false,
                 source: 'chainlink',
             },
         ],
@@ -140,20 +116,14 @@ const ExampleBundles: Bundle[] = [
         id: 4,
         name: 'Arbitrum Airdrop',
         type: 'Popular',
-        created: 'Bundle',
-        owner: 'Julo.eth',
+        createdBy: 'Bundle',
         description: "Check if you're eligible for Arbitrum airdrop",
         tags: ['NFT', 'Art', 'Music'],
-        trigger: {
-            title: 'Start by...',
-            type: 'internal',
-            input: 'wallet',
-        },
         conditions: [
             {
                 id: 1,
                 title: 'Check for...',
-                type: 'data',
+                status: false,
                 source: 'chainlink',
             },
         ],
@@ -170,21 +140,15 @@ const ExampleBundles: Bundle[] = [
         id: 5,
         name: 'Create single NFT and deploy to chain of your choice',
         type: 'Pre-defined',
-        created: 'Bundle',
-        owner: 'Julo.eth',
+        createdBy: 'Bundle',
         description:
             'Mint a singular NFT asset (ERC-721) to the network of your choice, initially setting ownership to your own wallet.',
         tags: ['NFT', 'Art', 'Music'],
-        trigger: {
-            title: 'Start by...',
-            type: 'internal',
-            input: 'wallet',
-        },
         conditions: [
             {
                 id: 1,
                 title: 'Check for...',
-                type: 'data',
+                status: false,
                 source: 'chainlink',
             },
         ],

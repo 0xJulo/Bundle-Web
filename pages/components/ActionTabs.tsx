@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
 import BundleDetail from './BundleDetail';
 
-const ActionTabs: React.FC = () => {
+const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
+    onActionNameChange,
+}) => {
     const [activeTab, setActiveTab] = useState(0);
 
     const tabs = [
@@ -12,6 +14,10 @@ const ActionTabs: React.FC = () => {
         { label: 'NFTs', content: 'This is the content of Tab 3' },
         { label: 'Bridge', content: 'This is the content of Tab 4' },
     ];
+
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onActionNameChange(e.target.value);
+    };
 
     return (
         <div className='w-full mb-8 mt-6'>
@@ -38,13 +44,14 @@ const ActionTabs: React.FC = () => {
                     >
                         <input
                             type='radio'
-                            id='condition'
-                            name='condition'
-                            value='condition'
+                            id='uniswapSwap'
+                            name='uniswapSwap'
+                            value='uniswapSwap'
                             className='mb-3 mr-2 h-5 w-5'
+                            onChange={handleNameChange}
                         />
                         <label
-                            htmlFor='condition'
+                            htmlFor='uniswapSwap'
                             className='bundle-text-smaller'
                         >
                             Swap two assets on Uniswap
