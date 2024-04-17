@@ -1,39 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export const BundlesContext = createContext<Bundle[]>([]);
-export const useBundles = () => useContext(BundlesContext);
-
-// Create NFT interface - do you need this?
-export interface CreateNFT {
-    network: string;
-    name: string;
-    description: string;
-    image: string;
-}
-
-// Bundle data shape
-export interface Bundle {
-    id: number;
-    name: string;
-    type: string;
-    createdBy: string;
-    description: string;
-    tags?: string[];
-    conditions: Array<{
-        id: number;
-        title: string;
-        status: boolean;
-        source: string;
-    }>;
-    actions: Array<{
-        id: number;
-        title: string;
-        type: string;
-        source: string;
-    }>;
-    route?: string;
-}
-
 // Example data for bundles
 const ExampleBundles: Bundle[] = [
     {
@@ -167,5 +133,41 @@ const ExampleBundles: Bundle[] = [
         route: '/screens/CreateNFTPage',
     },
 ];
+
+export const BundlesContext = createContext<Bundle[]>(ExampleBundles);
+export const useBundles = () => useContext(BundlesContext);
+
+// Create NFT interface - do you need this?
+export interface CreateNFT {
+    network: string;
+    name: string;
+    description: string;
+    image: string;
+}
+
+// Bundle data shape
+export interface Bundle {
+    id: number;
+    name: string;
+    type: string;
+    createdBy: string;
+    description: string;
+    tags?: string[];
+    conditions: Array<{
+        id: number;
+        title: string;
+        status: boolean;
+        source: string;
+    }>;
+    actions: Array<{
+        id: number;
+        title: string;
+        type: string;
+        source: string;
+    }>;
+    route?: string;
+}
+
+
 
 export default ExampleBundles;
