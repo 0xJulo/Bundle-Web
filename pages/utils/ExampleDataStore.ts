@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+export const BundlesContext = createContext<Bundle[]>([]);
+export const useBundles = () => useContext(BundlesContext);
+
+// Create NFT interface - do you need this?
 export interface CreateNFT {
     network: string;
     name: string;
