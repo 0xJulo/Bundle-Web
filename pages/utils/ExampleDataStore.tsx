@@ -12,7 +12,7 @@ const ExampleBundles: Bundle[] = [
         conditions: [
             {
                 id: 1,
-                title: 'Check for...',
+                title: 'uniswapCompare',
                 status: false,
             },
             {
@@ -24,7 +24,7 @@ const ExampleBundles: Bundle[] = [
         actions: [
             {
                 id: 1,
-                title: 'Send a...',
+                title: 'uniswapSwap',
                 type: 'transaction',
                 source: 'external',
             },

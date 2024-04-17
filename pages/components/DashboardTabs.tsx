@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useBundles, Bundle } from '../utils/ExampleDataStore';
 import BundleDetail from './BundleDetail';
+import Link from 'next/link';
 
 const DashboardTabs: React.FC = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -44,7 +45,9 @@ const DashboardTabs: React.FC = () => {
                 ))}
                 <div className='md:grid md:grid-cols-2 md:gap-x-6'>
                     {filteredBundles.map((bundle) => (
-                        <BundleDetail key={bundle.id} bundle={bundle} />
+                        <Link href={`/Bundle/${bundle.id}`} key={bundle.id}>
+                            <BundleDetail key={bundle.id} bundle={bundle} />
+                        </Link>
                     ))}
                 </div>
             </div>
