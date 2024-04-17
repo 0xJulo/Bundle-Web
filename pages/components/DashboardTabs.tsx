@@ -1,23 +1,24 @@
 'use client';
 import React, { useState } from 'react';
-import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
+import { useBundles, Bundle } from '../utils/ExampleDataStore';
 import BundleDetail from './BundleDetail';
 
-const Tabs: React.FC = () => {
+const DashboardTabs: React.FC = () => {
     const [activeTab, setActiveTab] = useState(0);
+    const { bundles } = useBundles();
 
     const tabs = [
-        { label: 'All', content: 'This is the content of Tab 1' },
-        { label: 'Saved', content: 'This is the content of Tab 2' },
-        { label: 'Popular', content: 'This is the content of Tab 3' },
-        { label: 'Pre-defined', content: 'This is the content of Tab 4' },
+        { label: 'All' },
+        { label: 'Saved' },
+        { label: 'Popular' },
+        { label: 'Pre-defined' },
     ];
 
     const getFilteredBundles = () => {
         if (tabs[activeTab].label === 'All') {
-            return ExampleBundles;
+            return bundles;
         } else {
-            return ExampleBundles.filter(
+            return bundles.filter(
                 (bundle) => bundle.type === tabs[activeTab].label
             );
         }
@@ -51,4 +52,4 @@ const Tabs: React.FC = () => {
     );
 };
 
-export default Tabs;
+export default DashboardTabs;

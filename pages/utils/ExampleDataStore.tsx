@@ -14,13 +14,11 @@ const ExampleBundles: Bundle[] = [
                 id: 1,
                 title: 'Check for...',
                 status: false,
-                source: 'chainlink',
             },
             {
                 id: 2,
                 title: 'If',
                 status: false,
-                source: 'chainlink',
             },
         ],
         actions: [
@@ -45,7 +43,6 @@ const ExampleBundles: Bundle[] = [
                 id: 1,
                 title: 'Check for...',
                 status: false,
-                source: 'chainlink',
             },
         ],
         actions: [
@@ -70,7 +67,6 @@ const ExampleBundles: Bundle[] = [
                 id: 1,
                 title: 'Check for...',
                 status: false,
-                source: 'chainlink',
             },
         ],
         actions: [
@@ -94,7 +90,6 @@ const ExampleBundles: Bundle[] = [
                 id: 1,
                 title: 'Check for...',
                 status: false,
-                source: 'chainlink',
             },
         ],
         actions: [
@@ -119,7 +114,6 @@ const ExampleBundles: Bundle[] = [
                 id: 1,
                 title: 'Check for...',
                 status: false,
-                source: 'chainlink',
             },
         ],
         actions: [
@@ -134,17 +128,6 @@ const ExampleBundles: Bundle[] = [
     },
 ];
 
-export const BundlesContext = createContext<Bundle[]>(ExampleBundles);
-export const useBundles = () => useContext(BundlesContext);
-
-// Create NFT interface - do you need this?
-export interface CreateNFT {
-    network: string;
-    name: string;
-    description: string;
-    image: string;
-}
-
 // Bundle data shape
 export interface Bundle {
     id: number;
@@ -157,7 +140,6 @@ export interface Bundle {
         id: number;
         title: string;
         status: boolean;
-        source: string;
     }>;
     actions: Array<{
         id: number;
@@ -167,6 +149,55 @@ export interface Bundle {
     }>;
     route?: string;
 }
+
+// Create NFT interface - do you need this?
+export interface CreateNFT {
+    network: string;
+    name: string;
+    description: string;
+    image: string;
+}
+
+export const BundlesContext = createContext<{
+    bundles: Bundle[];
+    addBundle?: (bundle: Bundle) => void;
+}>({bundles: ExampleBundles});
+
+export const useBundles = () => useContext(BundlesContext);
+
+export const BundlesProvider: React.FC<{children: ReactNode}> = ({ children }) => {
+    const [bundles, setBundles] = React.useState<Bundle[]>(ExampleBundles);
+
+    const addBundle = (bundle: Bundle) => {
+        setBundles((prevBundles) => [...prevBundles, bundle]);
+    };
+
+    const value = React.useMemo(() => ({bundles, addBundle}), [bundles]);
+
+    return (
+        <BundlesContext.Provider value={value}>
+            {children}
+        </BundlesContext.Provider>
+    );
+}
+
+
+
+
+// export const BundlesContext = createContext<Bundle[]>(ExampleBundles);
+// export const useBundles = () => useContext(BundlesContext);
+
+// export const BundlesProvider:React.FC<{children: React.ReactNode}> = ({children}) => {
+//     return (
+//         <BundlesContext.Provider value={ExampleBundles}>
+//             {children}
+//         </BundlesContext.Provider>
+//     );
+// }
+
+
+
+
 
 
 

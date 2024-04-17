@@ -6,7 +6,7 @@ import {
     type BaseError,
 } from 'wagmi';
 import abi from '../utils/Bundle.abi.json';
-import { Bundle } from '../utils/ExampleDataStore';
+import { Bundle, useBundles } from '../utils/ExampleDataStore';
 
 // Component imports
 import ConditionTabs from '../components/ConditionsTabs';
@@ -21,6 +21,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
     handleCreateNewBundle,
 }) => {
     const router = useRouter();
+    const { addBundle } = useBundles();
     const [evidence, setEvidence] = React.useState<any>('');
     const [ipfsLoading, setIpfsLoading] = React.useState<boolean>(false);
     const [isCondition, setIsCondition] = React.useState<boolean>(false);
@@ -92,10 +93,12 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
     const handleActionNameChange = (name: string) => {
         setActionName(name);
     };
-    const handleCreateBundle = (): Bundle => {
+    const handleCreateBundle = (): void => {
+        // stand in for unique ID
+        const uniqueId = Date.now();
         // Bundle object constructor
         const newBundle: Bundle = {
-            id: 7, // Need to generate random id
+            id: uniqueId,
             name: bundleName,
             type: 'My Bundles',
             createdBy: 'You', // need to get wallet address here
@@ -103,9 +106,8 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
             conditions: [
                 {
                     id: 1, // ID within the conditions array
-                    title: conditionName,
+                    title: conditionName ? conditionName : 'none',
                     status: false,
-                    source: 'Your Condition Source',
                 },
                 // Add more conditions as needed
             ],
@@ -119,9 +121,14 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                 // Add more actions as needed
             ],
             // route is optional, include it if needed
-            route: '/your/route/here',
+            route: '',
         };
-        return newBundle;
+        if (addBundle) {
+            addBundle(newBundle);
+            router.push('/');
+        } else {
+            console.log('Error adding bundle');
+        }
     };
     {
         /* Bundle object and write to store */
@@ -290,6 +297,17 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
             >
                 {ipfsLoading || isPending ? 'Creating...' : 'Create Bundle'}
             </button>
+            {/* Button add new bundle to store */}
+            <button
+                type='button'
+                onClick={() => {
+                    handleCreateBundle();
+                }}
+                disabled={isPending}
+                className='mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+            >
+                add bundle to local store and render on dashboard
+            </button>
             {/* Web3 shit */}
             {hash && <div>Transaction Hash: {hash}</div>}
             {isConfirming && <div>Waiting for confirmation...</div>}
@@ -300,6 +318,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                 </div>
             )}
             <hr className='my-8' />
+            {/* Bundle Structure code */}
             <div className='py-12'>
                 <h2>Constructor Details</h2>
                 <p>id: need to sort generating unique ids</p>
