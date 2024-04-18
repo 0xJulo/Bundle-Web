@@ -6,7 +6,7 @@ const SideMenu: React.FC = () => {
     const [isArbitrumOpen, setIsArbitrumOpen] = React.useState(false);
     const [isGnosisOpen, setIsGnosisOpen] = React.useState(false);
     return (
-        <aside className='bg-gray-200 w-1/5 h-screen hidden md:flex flex-col items-start justify-between px-4'>
+        <aside className='bg-gray-200 w-1/5 h-screen fixed hidden md:flex flex-col items-start justify-between px-4'>
             <div>
                 <div className='mb-8 flex flex-col items-start mt-24'>
                     <h3 className='text-2xl font-bold mb-2'>My Assets</h3>
