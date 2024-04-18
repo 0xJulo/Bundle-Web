@@ -42,8 +42,8 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
                 </div>
                 <div className='mt-4'>
                     <Button
-                        label='Run Bundle'
-                        onClick={handleRunBundle}
+                        label='View Bundle'
+                        onClick={() => {}}
                         bundleId={bundle.id}
                     />
                 </div>
