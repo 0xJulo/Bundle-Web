@@ -34,19 +34,13 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
       <div className="bg-gray-100 flex p-2 pl-3 rounded-t-[10px] font-semibold">
         <p>{bundle.type}</p>
       </div>
-            <div className='flex flex-col justify-between p-3'>
-                <div>
-                    <h2 className='text-2xl font-semibold'>{bundle.name}</h2>
-                    <p className=' w-[95%]'>{bundle.description}</p>
-                </div>
-                <div className='mt-4'>
-                    <Button
-                        label='View Bundle'
-                        onClick={() => {}}
-                        bundleId={bundle.id}
-                    />
-                </div>
-            </div>
+      <div className="flex flex-col justify-between p-3">
+        <div>
+          <h2 className="text-2xl font-semibold">{bundle.name}</h2>
+          <p className=" w-[95%]">{bundle.description}</p>
+        </div>
+        <div className="mt-4">
+          <Button label="View Bundle" onClick={() => {}} bundleId={bundle.id} />
         </div>
       </div>
     </div>
