@@ -5,30 +5,6 @@ const UniswapCompare: React.FC = () => {
         <div className='mt-4'>
         {/* Form for creating the NFT */}
         <form>
-        {/* Network select */}
-        {/* <div className='mb-8'>
-            <label
-                htmlFor='networkSelect'
-                className='bundle-text-smaller'
-            >
-                Select network
-            </label>
-            <select
-                id='networkSelect'
-                name='networkSelect'
-                className='mt-2 md:mt-4 block w-full h-12 p-2 bg-white rounded-md border-[#80BAA8] border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-            >
-                <option value=''>
-                    Please select a network
-                </option>
-                <option value='ethereum'>Ethereum</option>
-                <option value='arbitrum'>Arbitrum</option>
-                <option value='polygon'>Polygon</option>
-                <option value='optimism'>Optimism</option>
-                <option value='bsc'>BSC</option>
-            </select>
-        </div> */}
-
         {/* When */}
         <div className='mb-5 flex flex-wrap md:flex-nowrap items-end'>
             <div className='w-1/3'>

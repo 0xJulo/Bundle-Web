@@ -4,6 +4,9 @@ import { useBundles } from "../utils/ExampleDataStore";
 
 import UniswapCompare from "../components/Uniswap/UniswapCompare";
 import UniswapSwap from "../components/Uniswap/UniswapSwap";
+import SingleERC721 from "../components/NFTs/SingleERC721";
+import UniswapComparisonStatus from "../components/Uniswap/UniswapComparisonStatus";
+import NFTMinted from "../components/NFTs/NFTMinted";
 
 import { useReadContract } from "wagmi";
 import abi from "../utils/aggregatorV3InterfaceABI.abi.json";
@@ -174,6 +177,21 @@ const RunBundlePage: React.FC = () => {
       <div>Check Price</div>
       <div>{price}</div>
       <button>Execute swap with USDC</button>
+
+      <div className="mt-12">
+        <p className="italic">If bundle is create NFT</p>
+        <SingleERC721 bundle={bundle} />
+        <hr className="mt-4 mb-6 md:my-8 w-1/2" />
+        <NFTMinted />
+      </div>
+      <hr className="mt-4 mb-6 md:my-8 w-1/2" />
+      <div className="mt-12">
+        <p className="italic">If bundle is a Uniswap Swap</p>
+        <UniswapComparisonStatus status="pending" />
+        <UniswapComparisonStatus status="completed" />
+        <hr className="mt-4 mb-6 md:my-8 w-1/2" />
+        <UniswapSwap />
+      </div>
     </section>
   );
 };
