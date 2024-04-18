@@ -9,7 +9,7 @@ const ExampleBundles: Bundle[] = [
     createdBy: "Bundle",
     description:
       "Set a condition for a price to be reached and swap assets from your wallet",
-    tags: ["NFT", "Art", "Music"],
+    tags: ["defi", "swap"],
     conditions: [
       {
         id: 1,
@@ -39,7 +39,7 @@ const ExampleBundles: Bundle[] = [
     createdBy: "Bundle",
     description:
       "Take assets from another chain and bridge to Gnosis to get funds on Gnosis Pay account",
-    tags: ["NFT", "Art", "Music"],
+    tags: ["defi", "bridge"],
     conditions: [
       {
         id: 1,
@@ -63,7 +63,7 @@ const ExampleBundles: Bundle[] = [
     type: "Saved",
     createdBy: "Bundle",
     description: "Use Woop pay to create a fundraier",
-    tags: ["NFT", "Art", "Music"],
+    tags: ["defi", "fundraiser"],
     conditions: [
       {
         id: 1,
@@ -86,7 +86,7 @@ const ExampleBundles: Bundle[] = [
     type: "Popular",
     createdBy: "Bundle",
     description: "Check if you're eligible for Arbitrum airdrop",
-    tags: ["NFT", "Art", "Music"],
+    tags: ["arbitrum", "airdrop"],
     conditions: [
       {
         id: 1,
@@ -110,7 +110,7 @@ const ExampleBundles: Bundle[] = [
     createdBy: "Bundle",
     description:
       "Mint a singular NFT asset (ERC-721) to the network of your choice, initially setting ownership to your own wallet.",
-    tags: ["NFT", "Art", "Music"],
+    tags: ["nft", "art", "music"],
     conditions: [
       {
         id: 1,

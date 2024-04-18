@@ -3,11 +3,22 @@ import React, { useState } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchBar: React.FC = () => {
+interface SearchBarProps {
+    onSearch: (searchTerm: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value;
+    setQuery(searchTerm);
+    onSearch(searchTerm);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(query);
+    onSearch(query);
   }
   return (
     <form className="w-full mb-8 md:mb-5">
@@ -16,7 +27,7 @@ const SearchBar: React.FC = () => {
             className="w-full h-12 pl-3 pr-10 py-2 rounded border"
             type="text" 
             value={query} 
-            onChange={(e) => setQuery(e.target.value)} 
+            onChange={handleChange} 
             placeholder='Search for a bundle'
           />
           <button 

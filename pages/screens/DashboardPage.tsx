@@ -22,7 +22,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({
 
     return (
         <section className='h-[100vh] mx-4 mt-24 md:mx-10 md:mt-24'>
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
             <DashboardTabs searchTerm={searchTerm} />
             <CreateBundleButton handleCreateNewBundle={handleCreateNewBundle} />
         </section>
