@@ -8,7 +8,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, bundleId }) => {
   return (
-      <button className='bundle-primary-button' onClick={() => onClick(bundleId)}>{label}</button>
+      <button className='bundle-primary-button' onClick={() => {}}>{label}</button>
   ); 
 };
 
