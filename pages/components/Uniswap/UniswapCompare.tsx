@@ -2,11 +2,11 @@ import React from 'react';
 
 const UniswapCompare: React.FC = () => {
     return (
-        <div className='mb-8 md:w-1/2'>
+        <div className='mb-8'>
         {/* Form for creating the NFT */}
         <form>
         {/* Network select */}
-        <div className='mb-8'>
+        {/* <div className='mb-8'>
             <label
                 htmlFor='networkSelect'
                 className='bundle-text-smaller'
@@ -27,7 +27,7 @@ const UniswapCompare: React.FC = () => {
                 <option value='optimism'>Optimism</option>
                 <option value='bsc'>BSC</option>
             </select>
-        </div>
+        </div> */}
 
         {/* When */}
         <div className='mb-5 flex flex-wrap md:flex-nowrap items-end'>
@@ -82,6 +82,7 @@ const UniswapCompare: React.FC = () => {
                 </option>
                 <option value='greater-than'>Greater than</option>
                 <option value='less-than'>Less than</option>
+                <option value='equal-to'>Equal to</option>
             </select>
         </div>
 

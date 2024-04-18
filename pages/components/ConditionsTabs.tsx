@@ -1,6 +1,7 @@
 "use client";
 import { userAgent } from "next/server";
 import React, { useState } from "react";
+import UniswapCompare from "./Uniswap/UniswapCompare";
 
 interface conditionObject {
   name: string | undefined;
@@ -17,6 +18,7 @@ const ConditionsTabs: React.FC<{
   const [selectedAssets, setSelectedAssets] = useState<string>("ETH");
   const [selectedSigns, setSelectedSigns] = useState<string>(">");
   const [amount, setAmount] = useState<number>(0);
+  const [uniswap, setUniswap] = useState<boolean>(false);
 
   const tabs = [
     { label: "Check data source (ChainLink)" },
@@ -120,6 +122,7 @@ const ConditionsTabs: React.FC<{
             <button type="button" onClick={handleUniswapCreate}>
               Run
             </button>
+            <UniswapCompare />
           </div>
           {/* Check volume of NFT project on OpenSea */}
           <div id="opensea" className="mt-4 bg-gray-200 rounded-lg w-full p-6">

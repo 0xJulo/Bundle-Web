@@ -2,8 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useBundles } from "../utils/ExampleDataStore";
 
-import UniswapCompare from "../components/UniswapCompare";
-import UniswapSwap from "../components/UniswapSwap";
+import UniswapCompare from "../components/Uniswap/UniswapCompare";
+import UniswapSwap from "../components/Uniswap/UniswapSwap";
 
 import { useReadContract } from "wagmi";
 import abi from "../utils/aggregatorV3InterfaceABI.abi.json";

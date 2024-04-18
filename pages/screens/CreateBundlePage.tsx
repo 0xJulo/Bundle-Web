@@ -157,7 +157,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       <hr className="mt-4 mb-6 md:my-8" />
 
       {/* New code updates */}
-      <div className="mb-8 md:w-1/2">
+      <div className="mb-8 md:w-2/3">
         {/* start of details */}
         <div id="details">
           <div className="mt-4">
