@@ -4,7 +4,11 @@ import { useBundles, Bundle } from '../utils/ExampleDataStore';
 import BundleDetail from './BundleDetail';
 import Link from 'next/link';
 
-const DashboardTabs: React.FC = () => {
+interface DashboardTabsProps {
+    searchTerm: string;
+}
+
+const DashboardTabs: React.FC<DashboardTabsProps> = ({ searchTerm }) => {
     const [activeTab, setActiveTab] = useState(0);
     const { bundles } = useBundles();
 
@@ -16,6 +20,8 @@ const DashboardTabs: React.FC = () => {
     ];
 
     const getFilteredBundles = () => {
+        let filteredBundles = bundles;
+        
         if (tabs[activeTab].label === 'All') {
             return bundles;
         } else {

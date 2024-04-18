@@ -14,12 +14,16 @@ interface DashboardPageProps {
 const DashboardPage: React.FC<DashboardPageProps> = ({
     handleCreateNewBundle,
 }) => {
-    // const bundles: Bundle[] = ExampleBundles;
+    const [searchTerm, setSearchTerm] = useState<string>("");
+
+    const handleSearch = (searchTerm: string) => {
+        setSearchTerm(searchTerm);
+    }
 
     return (
         <section className='h-[100vh] mx-4 mt-24 md:mx-10 md:mt-24'>
             <SearchBar />
-            <DashboardTabs />
+            <DashboardTabs searchTerm={searchTerm} />
             <CreateBundleButton handleCreateNewBundle={handleCreateNewBundle} />
         </section>
     );
