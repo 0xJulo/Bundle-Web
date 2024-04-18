@@ -10,11 +10,11 @@ import NFTMinted from "../components/NFTs/NFTMinted";
 
 import { useReadContract } from "wagmi";
 import abi from "../utils/aggregatorV3InterfaceABI.abi.json";
+import bundleAbi from "../utils/Bundle.abi.json";
 
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { ForkRight, Share } from "@mui/icons-material";
-
 
 // Bundle data shape
 
@@ -61,7 +61,7 @@ const RunBundlePage: React.FC = () => {
   //     setDislike(false);
   //   }
   // };
-  
+
   // const handleDislike = () => {
   //   if (dislike) {
   //     setDislike(!dislike);
@@ -100,6 +100,31 @@ const RunBundlePage: React.FC = () => {
     address: "0xd30e2101a97dcbAeBCBC04F14C3f624E67A35165",
   });
 
+  const { data: ipfsUrl } = useReadContract({
+    abi: bundleAbi,
+    functionName: "tokenUri",
+    address: "0xb7403174d3325C3aD6B4576E10F85c2b63e68cF8",
+    args: [bundleId],
+  });
+
+  React.useEffect(() => {
+    if (ipfsUrl) {
+      callIpfs();
+    }
+  }, [ipfsUrl]);
+
+  const callIpfs = async () => {
+    try {
+      const response = await fetch(
+        `https://sapphire-living-peafowl-558.mypinata.cloud/ipfs/${ipfsUrl}`
+      );
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (!bundle) {
     return (
       <>
@@ -124,55 +149,68 @@ const RunBundlePage: React.FC = () => {
         <div className="flex space-x-4">
           <div className="flex items-center">
             {like ? (
-              <button 
+              <button
                 className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
                 onClick={() => setLike(!like)}
               >
-              <ThumbUpAltIcon className="text-white" />
+                <ThumbUpAltIcon className="text-white" />
               </button>
             ) : (
-              <button 
+              <button
                 className="rounded-full bg-white border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
                 onClick={() => setLike(!like)}
               >
-              <ThumbUpAltIcon className="text-[#80BAA8]" />
-            </button>
+                <ThumbUpAltIcon className="text-[#80BAA8]" />
+              </button>
             )}
             <p className="text-[#80BAA8] font-bold">204</p>
           </div>
           <div className="flex items-center">
             {dislike ? (
-              <button 
+              <button
                 className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
                 onClick={() => setDislike(!dislike)}
               >
-              <ThumbDownAltIcon className="text-white" />
+                <ThumbDownAltIcon className="text-white" />
               </button>
             ) : (
-              <button 
+              <button
                 className="rounded-full bg-white border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
                 onClick={() => setDislike(!dislike)}
               >
-              <ThumbDownAltIcon className="text-[#80BAA8]" />
-            </button>
+                <ThumbDownAltIcon className="text-[#80BAA8]" />
+              </button>
             )}
             <p className="text-[#80BAA8] font-bold">3</p>
           </div>
         </div>
         <div className="text-right">
-            <p><a href="" target="_blank" className="text-gray-400" aria-disabled="true">Fork this bundle</a></p>
-            <p><a href="#" target="_blank" className="text-blue-500">Share this bundle</a></p>
+          <p>
+            <a
+              href=""
+              target="_blank"
+              className="text-gray-400"
+              aria-disabled="true"
+            >
+              Fork this bundle
+            </a>
+          </p>
+          <p>
+            <a href="#" target="_blank" className="text-blue-500">
+              Share this bundle
+            </a>
+          </p>
         </div>
-
       </div>
-      
-      
-
 
       <hr className="mt-4 mb-6 md:my-8" />
       <div>{bundle.name}</div>
       <div>{bundle.description}</div>
-      {bundle.conditions.title === "uniswapCompare" ? <UniswapCompare /> : <></>}
+      {bundle.conditions.title === "uniswapCompare" ? (
+        <UniswapCompare />
+      ) : (
+        <></>
+      )}
       {bundle.conditions.title === "uniswapSwap" ? <UniswapSwap /> : <></>}
       <div>Check Price</div>
       <div>{price}</div>

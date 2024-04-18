@@ -139,10 +139,10 @@ interface conditionObject {
 
 // Bundle data shape
 export interface Bundle {
-  id: number;
+  id: string;
   name: string;
   type: string;
-  createdBy: string;
+  createdBy: any;
   description: string;
   tags?: string[];
   conditions: conditionObject | undefined;

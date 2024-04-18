@@ -2,7 +2,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import {
   useWriteContract,
+  useReadContract,
   useWaitForTransactionReceipt,
+  useAccount,
   type BaseError,
 } from "wagmi";
 import abi from "../utils/Bundle.abi.json";
@@ -29,13 +31,14 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
 }) => {
   const router = useRouter();
   const { addBundle } = useBundles();
-  const [evidence, setEvidence] = React.useState<any>("");
   const [ipfsLoading, setIpfsLoading] = React.useState<boolean>(false);
   const [isCondition, setIsCondition] = React.useState<boolean>(false);
   const conditionRef = React.useRef(null);
+  const { address: owner } = useAccount();
 
   // State for bundle items
   const [bundleName, setBundleName] = React.useState<string>("");
+  const [bundleId, setBundleId] = React.useState<string>("");
   const [bundleDescription, setBundleDescription] = React.useState<string>("");
   const [conditionName, setConditionName] = React.useState<conditionObject>();
   const [actionName, setActionName] = React.useState<string>("");
@@ -47,16 +50,8 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       hash,
     });
 
-  const pinBundle = async () => {
+  const pinBundle = async (data: Bundle): Promise<string> => {
     setIpfsLoading(true);
-    const data = {
-      bundleId: "02",
-      name: bundleName,
-      description: bundleDescription,
-      condition: conditionName,
-      action: "swap-token",
-    };
-
     try {
       const response = await fetch("/api/pinToPinata", {
         method: "POST",
@@ -71,45 +66,33 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       }
 
       const result = await response.json();
-      setEvidence(
-        `https://sapphire-living-peafowl-558.mypinata.cloud/ipfs/${result.IpfsHash}`
-      );
+      const evidenceUrl = `https://sapphire-living-peafowl-558.mypinata.cloud/ipfs/${result.IpfsHash}`;
       console.log("Pinned data:", result.IpfsHash);
       setIpfsLoading(false);
+      return evidenceUrl; // Return the URL instead of setting state
     } catch (error) {
       console.error("Error pinning data to Pinata:", error);
       setIpfsLoading(false);
+      return Promise.reject(error);
     }
   };
 
-  const createBundle = () => {
+  const createBundle = (evidenceUrl: string) => {
     writeContract({
       address: "0xb7403174d3325C3aD6B4576E10F85c2b63e68cF8",
       abi,
       functionName: "safeMint",
-      args: [evidence],
+      args: [evidenceUrl],
     });
   };
 
-  {
-    /* Bundle object and write to store */
-  }
-  const handleConditionNameChange = (condition: conditionObject) => {
-    setConditionName(condition);
-    console.log(condition);
-  };
-  const handleActionNameChange = (name: string) => {
-    setActionName(name);
-  };
-  const handleCreateBundle = (): void => {
-    // stand in for unique ID
-    const uniqueId = Date.now();
+  const handleCreateBundle = async () => {
     // Bundle object constructor
     const newBundle: Bundle = {
-      id: uniqueId,
+      id: bundleId,
       name: bundleName,
-      type: "My Bundles",
-      createdBy: "You", // need to get wallet address here
+      type: "My Bundless",
+      createdBy: owner as string, // need to get wallet address here
       description: bundleDescription,
       conditions: conditionName,
       // Add more conditions as needed
@@ -126,16 +109,42 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       // route is optional, include it if needed
       route: "",
     };
-    if (addBundle) {
-      addBundle(newBundle);
-      router.push("/");
-    } else {
-      console.log("Error adding bundle");
+    try {
+      const evidenceUrl = await pinBundle(newBundle);
+      createBundle(evidenceUrl);
+
+      if (addBundle) {
+        addBundle(newBundle);
+      } else {
+        console.log("Error adding bundle");
+      }
+    } catch (error) {
+      console.log("Failed to create bundle:", error);
     }
   };
+
+  const { data: tokenId } = useReadContract({
+    address: "0xb7403174d3325C3aD6B4576E10F85c2b63e68cF8",
+    abi,
+    functionName: "_nextTokenId",
+  });
+
+  React.useEffect(() => {
+    if (tokenId) {
+      setBundleId(tokenId.toString());
+    }
+  }, [tokenId]);
+
   {
     /* Bundle object and write to store */
   }
+  const handleConditionNameChange = (condition: conditionObject) => {
+    setConditionName(condition);
+    console.log(condition);
+  };
+  const handleActionNameChange = (name: string) => {
+    setActionName(name);
+  };
 
   const uncheckCondition = () => {
     if (conditionRef.current) {
@@ -225,16 +234,17 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
               </a>
             )}
             <p className="mb-3">
-              Conditions allow you to check data or wallets to verify if a situation
-              is true, or if some assets are present. 
+              Conditions allow you to check data or wallets to verify if a
+              situation is true, or if some assets are present.
             </p>
             <p className="mb-3">
-              These conditions may be chained together through an "and / or" system,
-              allowing you to create unique and specific conditions sets. (Not available
-              for ETH Global Hackathon).
+              These conditions may be chained together through an "and / or"
+              system, allowing you to create unique and specific conditions
+              sets. (Not available for ETH Global Hackathon).
             </p>
             <p className="font-bold">
-              Conditions must be fufilled (return true) before the action can be executed
+              Conditions must be fufilled (return true) before the action can be
+              executed
             </p>
             {isCondition && (
               <>
@@ -268,14 +278,16 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
         <div id="action">
           <h3 className="mb-3 bundle-text">Action</h3>
           <p>
-            An action is typically some form of transaction. Like conditions, you can create a series of actions that will be chained together,
-            allowing you to create tailored or personalised bundles for your needs. (Not available
-              for ETH Global Hackathon).
+            An action is typically some form of transaction. Like conditions,
+            you can create a series of actions that will be chained together,
+            allowing you to create tailored or personalised bundles for your
+            needs. (Not available for ETH Global Hackathon).
           </p>
           <p className="mt-4">
-            Please note that if you select a condition, you will not be able to run the
-            action until the condition is met. You may also create actions which do not rely
-            on conditions, allowing you to perform different or common actions quickly.
+            Please note that if you select a condition, you will not be able to
+            run the action until the condition is met. You may also create
+            actions which do not rely on conditions, allowing you to perform
+            different or common actions quickly.
           </p>
           <p className="mt-4">
             Below are some sections which you can use to create your action.
@@ -295,13 +307,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       <button
         type="button"
         onClick={() => {
-          pinBundle()
-            .then(() => {
-              createBundle();
-            })
-            .catch((error) => {
-              console.error("Error in pinBundle:", error);
-            });
+          handleCreateBundle();
         }}
         disabled={isPending}
         className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -309,16 +315,21 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
         {ipfsLoading || isPending ? "Creating..." : "Create Bundle"}
       </button>
       {/* Button add new bundle to store */}
-      <button
-        type="button"
-        onClick={() => {
-          handleCreateBundle();
-        }}
-        disabled={isPending}
-        className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        add bundle to local store and render on dashboard
-      </button>
+      {isConfirmed ? (
+        <button
+          type="button"
+          onClick={() => {
+            router.push("/");
+          }}
+          disabled={isPending}
+          className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add bundle to dashboard
+        </button>
+      ) : (
+        <></>
+      )}
+
       {/* Web3 shit */}
       {hash && <div>Transaction Hash: {hash}</div>}
       {isConfirming && <div>Waiting for confirmation...</div>}
