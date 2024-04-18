@@ -25,7 +25,7 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                 <button
                     key={index}
                     onClick={() => setActiveTab(index)}
-                    className={`mb-6 px-4 py-2 ${
+                    className={`mb-2 px-4 py-2 ${
                         activeTab === index
                             ? 'border-b-2 border-[#80BAA8] text-[#80BAA8]'
                             : 'text-gray-500 hover:text-gray-700'
@@ -57,10 +57,8 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             Swap two assets on Uniswap
                         </label>
                         <p>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will ask for the two tokens that you wish to swap, along with how much
+                            of the original asset you would like to swap.
                         </p>
                     </div>
                     {/* Transactions */}
@@ -80,13 +78,11 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             htmlFor='condition'
                             className='bundle-text-smaller text-gray-400'
                         >
-                            Send transaction to another wallet
+                            Enter another use case
                         </label>
                         <p className='text-gray-400'>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will ask for the recipient's wallet address and the amount of
+                            tokens you would like to send.
                         </p>
                     </div>
                     {/* Check events from Smart Contract */}
@@ -106,13 +102,11 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             htmlFor='condition'
                             className='bundle-text-smaller text-gray-400'
                         >
-                            Check events from Smart Contract
+                            Stake assets
                         </label>
                         <p className='text-gray-400'>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will allow you to choose a staking platform, and from
+                            that choice which tokens you would like to stake.
                         </p>
                     </div>
                 </div>
@@ -139,10 +133,8 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             Send transactions to another wallet
                         </label>
                         <p>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will ask for the recipient's wallet address and the amount of
+                            tokens you would like to send.
                         </p>
                     </div>
                     {/* Create Woop Pay fundraiser link */}
@@ -156,18 +148,18 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             name='condition'
                             value='condition'
                             className='mb-3 mr-2 h-5 w-5'
+                            disabled={true}
                         />
                         <label
                             htmlFor='condition'
-                            className='bundle-text-smaller'
+                            className='bundle-text-smaller text-gray-400'
                         >
                             Create Woop Pay fundraiser link
                         </label>
-                        <p>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                        <p className='text-gray-400'>
+                            This action will allow you to create a Woop Pay link, set a target
+                            you would like to receive and provide you with a QR code to share 
+                            with others.
                         </p>
                     </div>
                 </div>
@@ -191,13 +183,12 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             htmlFor='condition'
                             className='bundle-text-smaller'
                         >
-                            Sell NFT on OpenSea
+                            Create single ERC-721 NFT
                         </label>
                         <p>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will walk you through the process of quickly
+                            creating an NFT. You may upload an asset from your computer
+                            to do this.
                         </p>
                     </div>
                     {/* Check presence of NFT in wallet */}
@@ -217,13 +208,11 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             htmlFor='condition'
                             className='bundle-text-smaller text-gray-400'
                         >
-                            Check for presence of NFT in wallet
+                            Sell NFT on OpenSea
                         </label>
                         <p className='text-gray-400'>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will allow you to list an items on OpenSea 
+                            for sale. You may set the price you are hoping to get for it.
                         </p>
                     </div>
                     {/* Check for transactions in wallet */}
@@ -243,13 +232,10 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             htmlFor='condition'
                             className='bundle-text-smaller text-gray-400'
                         >
-                            Check for transactions in wallet
+                            Send NFT to someone else
                         </label>
                         <p className='text-gray-400'>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will ask for a recipient's wallet address and the NFT you would like to send.
                         </p>
                     </div>
                 </div>
@@ -268,18 +254,17 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             name='condition'
                             value='condition'
                             className='mb-3 mr-2 h-5 w-5'
+                            disabled={true}
                         />
                         <label
                             htmlFor='condition'
-                            className='bundle-text-smaller'
+                            className='bundle-text-smaller text-gray-400'
                         >
                             Bridge assets to Gnosis Chain
                         </label>
-                        <p>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                        <p className='text-gray-400'>
+                            This action will ask for the desired amount and token
+                            that you would like to bridge to Gnosis Chain.
                         </p>
                     </div>
                     {/* Bridge assets to Arbitrum */}
@@ -293,18 +278,17 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             name='condition'
                             value='condition'
                             className='mb-3 mr-2 h-5 w-5'
+                            disabled={true}
                         />
                         <label
                             htmlFor='condition'
-                            className='bundle-text-smaller'
+                            className='bundle-text-smaller text-gray-400'
                         >
                             Bridge assets to Arbitrum
                         </label>
-                        <p>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                        <p className='text-gray-400'>
+                            This action will ask for the desired amount and token
+                            that you would like to bridge to Arbitrum.
                         </p>
                     </div>
                     {/* Bridge assets to Polygon */}
@@ -324,13 +308,11 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             htmlFor='condition'
                             className='bundle-text-smaller text-gray-400'
                         >
-                            Bridge assets to Polygon
+                            Open-ended bridge
                         </label>
                         <p className='text-gray-400'>
-                            This option will allow you to check a wallet for
-                            assets or simply send a transaction. You may use
-                            your own wallet or base your actions on someone
-                            elses
+                            This action will ask you for the two networks you want to bridge 
+                            between, as well as asset and amount. 
                         </p>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const UniswapCompare: React.FC = () => {
     return (
-        <div className='mb-8'>
+        <div className='mt-4'>
         {/* Form for creating the NFT */}
         <form>
         {/* Network select */}
@@ -120,7 +120,7 @@ const UniswapCompare: React.FC = () => {
         {/* Submit button */}
         <button
             type='submit'
-            className='mt-4 mb-12 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700'
+            className='mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700'
         >
             Set Condition
         </button>

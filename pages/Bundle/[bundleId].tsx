@@ -8,6 +8,11 @@ import UniswapSwap from "../components/Uniswap/UniswapSwap";
 import { useReadContract } from "wagmi";
 import abi from "../utils/aggregatorV3InterfaceABI.abi.json";
 
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import { ForkRight, Share } from "@mui/icons-material";
+
+
 // Bundle data shape
 
 interface conditionObject {
@@ -42,8 +47,24 @@ const RunBundlePage: React.FC = () => {
   const { bundles } = useBundles();
   const [bundle, setBundle] = React.useState<any>(null);
   const [price, setPrice] = React.useState<any>(0);
+  const [like, setLike] = React.useState<boolean>(false);
+  const [dislike, setDislike] = React.useState<boolean>(false);
 
   const goBack = () => router.back();
+
+  // const handleLike = () => {
+  //   if (like) {
+  //     setLike(!like);
+  //     setDislike(false);
+  //   }
+  // };
+  
+  // const handleDislike = () => {
+  //   if (dislike) {
+  //     setDislike(!dislike);
+  //     setLike(true); // Assuming you want to toggle like when dislike is toggled off, otherwise adjust logic as needed
+  //   }
+  // };
 
   function formatNumber(bigNumber: any) {
     // Ensure the divisor is also a BigInt
@@ -90,10 +111,66 @@ const RunBundlePage: React.FC = () => {
   return (
     <section className="h-[100vh] mx-4 mt-24 md:mx-10 md:mt-24">
       <button onClick={goBack}>close</button>
+      <div className="mb-4 md:mb-8 mt-3 md:mt-6">
+        <h2 className="bundle-h2 mb-2">{bundle.name}</h2>
+        <p className="text-sm">Created by: {bundle.createdBy}</p>
+        <p>{bundle.description}</p>
+      </div>
+
+      <div id="attestation" className="flex justify-between">
+        <div className="flex space-x-4">
+          <div className="flex items-center">
+            {like ? (
+              <button 
+                className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
+                onClick={() => setLike(!like)}
+              >
+              <ThumbUpAltIcon className="text-white" />
+              </button>
+            ) : (
+              <button 
+                className="rounded-full bg-white border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
+                onClick={() => setLike(!like)}
+              >
+              <ThumbUpAltIcon className="text-[#80BAA8]" />
+            </button>
+            )}
+            <p className="text-[#80BAA8] font-bold">204</p>
+          </div>
+          <div className="flex items-center">
+            {dislike ? (
+              <button 
+                className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
+                onClick={() => setDislike(!dislike)}
+              >
+              <ThumbDownAltIcon className="text-white" />
+              </button>
+            ) : (
+              <button 
+                className="rounded-full bg-white border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
+                onClick={() => setDislike(!dislike)}
+              >
+              <ThumbDownAltIcon className="text-[#80BAA8]" />
+            </button>
+            )}
+            <p className="text-[#80BAA8] font-bold">3</p>
+          </div>
+        </div>
+        <div className="text-right">
+            <p><a href="" target="_blank" className="text-gray-400" aria-disabled="true">Fork this bundle</a></p>
+            <p><a href="#" target="_blank" className="text-blue-500">Share this bundle</a></p>
+        </div>
+
+      </div>
+      
+      
+
+
+      <hr className="mt-4 mb-6 md:my-8" />
       <div>{bundle.name}</div>
       <div>{bundle.description}</div>
-      {bundle.condition.name === "uniswapCompare" ? <UniswapCompare /> : <></>}
-      {bundle.condition.name === "uniswapSwap" ? <UniswapSwap /> : <></>}
+      {bundle.conditions.title === "uniswapCompare" ? <UniswapCompare /> : <></>}
+      {bundle.conditions.title === "uniswapSwap" ? <UniswapSwap /> : <></>}
       <div>Check Price</div>
       <div>{price}</div>
       <button>Execute swap with USDC</button>

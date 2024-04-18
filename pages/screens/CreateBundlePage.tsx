@@ -225,12 +225,16 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
               </a>
             )}
             <p className="mb-3">
-              This option will allow you to check a wallet for assets or simply
-              send a transaction. You may use your own wallet or base your
-              actions on someone elses
+              Conditions allow you to check data or wallets to verify if a situation
+              is true, or if some assets are present. 
+            </p>
+            <p className="mb-3">
+              These conditions may be chained together through an "and / or" system,
+              allowing you to create unique and specific conditions sets. (Not available
+              for ETH Global Hackathon).
             </p>
             <p className="font-bold">
-              Conditions must be fufilled before the action can be executed
+              Conditions must be fufilled (return true) before the action can be executed
             </p>
             {isCondition && (
               <>
@@ -245,13 +249,13 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                     disabled
                     className="bg-gray-200 text-gray-400 font-bold py-2 px-4 rounded"
                   >
-                    Create another &apos;and&apos; condition
+                    Add another &apos;and&apos; condition
                   </button>
                   <button
                     disabled
                     className="bg-gray-200 text-gray-400 font-bold py-2 px-4 rounded"
                   >
-                    Create another &apos;or&apos; condition
+                    Add an &apos;or&apos; condition
                   </button>
                 </div>
               </>
@@ -263,13 +267,25 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
         {/* start of action */}
         <div id="action">
           <h3 className="mb-3 bundle-text">Action</h3>
-          <p>A trigger is how you will start your bundle</p>
+          <p>
+            An action is typically some form of transaction. Like conditions, you can create a series of actions that will be chained together,
+            allowing you to create tailored or personalised bundles for your needs. (Not available
+              for ETH Global Hackathon).
+          </p>
+          <p className="mt-4">
+            Please note that if you select a condition, you will not be able to run the
+            action until the condition is met. You may also create actions which do not rely
+            on conditions, allowing you to perform different or common actions quickly.
+          </p>
+          <p className="mt-4">
+            Below are some sections which you can use to create your action.
+          </p>
           <ActionTabs onActionNameChange={handleActionNameChange} />
           <button
             disabled
             className="bg-gray-200 text-gray-400 font-bold py-2 px-4 rounded"
           >
-            Create another action
+            Add another action
           </button>
         </div>
         {/* end of action */}
