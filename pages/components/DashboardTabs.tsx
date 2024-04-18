@@ -31,8 +31,10 @@ const DashboardTabs: React.FC<DashboardTabsProps> = ({ searchTerm }) => {
 
         // Further filter by search term
         if (searchTerm) {
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
             filteredBundles = filteredBundles.filter((bundle) =>
-                bundle.name.toLowerCase().includes(searchTerm.toLowerCase())
+                bundle.name.toLowerCase().includes(lowerCaseSearchTerm) ||
+                bundle.tags?.some((tag) => tag.toLowerCase().includes(lowerCaseSearchTerm))
             );
         }
 

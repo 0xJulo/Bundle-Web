@@ -9,6 +9,13 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value;
+    setQuery(searchTerm);
+    onSearch(searchTerm);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(query);
@@ -20,7 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             className="w-full h-12 pl-3 pr-10 py-2 rounded border"
             type="text" 
             value={query} 
-            onChange={(e) => setQuery(e.target.value)} 
+            onChange={handleChange} 
             placeholder='Search for a bundle'
           />
           <button 
