@@ -3,11 +3,15 @@ import React, { useState } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchBar: React.FC = () => {
+interface SearchBarProps {
+    onSearch: (searchTerm: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(query);
+    onSearch(query);
   }
   return (
     <form className="w-full mb-8 md:mb-5">

@@ -21,14 +21,22 @@ const DashboardTabs: React.FC<DashboardTabsProps> = ({ searchTerm }) => {
 
     const getFilteredBundles = () => {
         let filteredBundles = bundles;
-        
-        if (tabs[activeTab].label === 'All') {
-            return bundles;
-        } else {
-            return bundles.filter(
+
+        // Filter by tab
+        if (tabs[activeTab].label !== 'All') {
+            filteredBundles = filteredBundles.filter(
                 (bundle) => bundle.type === tabs[activeTab].label
             );
         }
+
+        // Further filter by search term
+        if (searchTerm) {
+            filteredBundles = filteredBundles.filter((bundle) =>
+                bundle.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        return filteredBundles;
     };
 
     const filteredBundles = getFilteredBundles();
