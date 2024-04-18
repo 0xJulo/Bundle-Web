@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         <Header />
                         <div className='flex'>
                             <SideMenu />
-                            <div className='flex-1'>
+                            <div className='flex-1 md:ml-[20%]'>
                                 <Component {...pageProps} />
                             </div>
                         </div>

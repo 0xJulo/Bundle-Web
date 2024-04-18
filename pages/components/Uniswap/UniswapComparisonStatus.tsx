@@ -6,7 +6,7 @@ interface UniswapComparisonStatusProps {
 
 const UniswapComparisonStatus: React.FC<UniswapComparisonStatusProps> = ({ status}) => {
   return (
-    <div className="mt-4 bg-gray-200 rounded-lg p-6 pr-8 w-1/2">
+    <div className="mt-4 bg-gray-200 rounded-lg p-6 pr-8 md:w-1/2">
         <h3 className='bundle-text mb-4'>Your condition</h3>
         <p className='bundle-text-smaller mb-4'>If 1 ETH is greater than 4000 USDC</p>
         {status === "pending" && (
