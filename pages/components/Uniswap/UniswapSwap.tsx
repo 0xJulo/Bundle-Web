@@ -8,14 +8,21 @@ const UniswapSwap: React.FC = () => {
         {/* Action */}
         <div className='mb-8'>
             <div>
-                <h3 className='mb-3 bundle-text'>Action</h3>
+            <div className='mb-8'>
+                        <a 
+                            href="https://etherscan.io/address/0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45" 
+                            target="_blank" rel="noopener noreferrer" 
+                            className='text-blue-500 hover:text-blue-700 underline'>
+                            View Uniswap v3 Router Contract (opens in new tab)
+                        </a>
+                    </div>
 
 
                 {/* Predefined amount */}
                 <div>
                     <div className='mb-2 mt-2 flex flex-wrap md:flex-nowrap items-end'>
                         <div className='w-1/2'>
-                            <label htmlFor='nftName' className='bundle-text-smaller'>
+                            <label htmlFor='nftName' className='bundle-text'>
                                 Amount
                             </label>
                             <input
@@ -27,7 +34,7 @@ const UniswapSwap: React.FC = () => {
                             />
                         </div>
                         <div className='w-1/2 mt-4 md:mt-0 md:ml-4'>
-                            <label htmlFor='nftName' className='bundle-text-smaller'>
+                            <label htmlFor='nftName' className='bundle-text'>
                                     Asset
                             </label>
                             <select
@@ -48,9 +55,9 @@ const UniswapSwap: React.FC = () => {
                             </select>
                         </div>
                     </div>
-                   <div className='mt-4 md:mt-0'>
-                           <label htmlFor='nftName' className='bundle-text-smaller'>
-                                   To
+                   <div className='mt-4 md:mt-6'>
+                           <label htmlFor='nftName' className='bundle-text'>
+                                   Swap to
                            </label>
                            <select
                                id='networkSelect'
@@ -71,14 +78,51 @@ const UniswapSwap: React.FC = () => {
                        </div>
                 </div>
             </div>
+            {/* gas cost */}
+            <div className='mb-8 mt-6'>
+                            <div>
+                                <h3 className='mb-3 bundle-text'>Gas cost:</h3>
+                                <div>
+                                    <input
+                                        type='radio'
+                                        id='fast'
+                                        name='gas'
+                                        value='fast'
+                                        className='mb-3'
+                                    />
+                                    <label htmlFor='fast'>High ($0.78)</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type='radio'
+                                        id='middle'
+                                        name='gas'
+                                        value='middle'
+                                        className='mb-3'
+                                    />
+                                    <label htmlFor='middle'>
+                                        Average ($0.58)
+                                    </label>
+                                </div>
+                                <div>
+                                    <input
+                                        type='radio'
+                                        id='low'
+                                        name='gas'
+                                    />
+                                    <label htmlFor='low'>Low ($0.58)</label>
+                                </div>
+                            </div>
+                        </div>
+
         </div>
 
         {/* Submit button */}
         <button
             type='submit'
-            className='mt-4 mb-12 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700'
+            className='mt-4 mb-12 px-4 py-2 bg-[#80BAA8] text-white rounded-md hover:bg-[#4c7f6f]'
         >
-            Create Bundle
+            Complete swap
         </button>
     </form>
     </div>
