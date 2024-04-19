@@ -19,7 +19,7 @@ interface CreateBundleScreenProps {
 }
 
 interface conditionObject {
-  name: string | undefined;
+  title: string | undefined;
   token: string | undefined;
   conditionSign: string | undefined;
   referencePoint: number | undefined;
@@ -91,12 +91,10 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
     const newBundle: Bundle = {
       id: bundleId,
       name: bundleName,
-      type: "My Bundless",
-      createdBy: owner as string, // need to get wallet address here
+      type: "My Bundles",
+      createdBy: owner as string,
       description: bundleDescription,
       conditions: conditionName,
-      // Add more conditions as needed
-
       actions: [
         {
           id: 1, // ID within the actions array
@@ -140,6 +138,8 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
   }
   const handleConditionNameChange = (condition: conditionObject) => {
     setConditionName(condition);
+    if (condition) {
+    }
     console.log(condition);
   };
   const handleActionNameChange = (name: string) => {
@@ -346,7 +346,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
         <p>Type: My Bundles</p>
         <p>Created by: You - need to sort getting user wallet</p>
         <p>Bundle description: {bundleDescription}</p>
-        <p>Condition: {conditionName?.name}</p>
+        <p>Condition: {conditionName?.title}</p>
         <p>Action: {actionName}</p>
       </div>
     </section>

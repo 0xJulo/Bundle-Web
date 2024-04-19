@@ -131,7 +131,7 @@ const ExampleBundles: Bundle[] = [
 ];
 
 interface conditionObject {
-  name: string | undefined;
+  title: string | undefined;
   token: string | undefined;
   conditionSign: string | undefined;
   referencePoint: number | undefined;

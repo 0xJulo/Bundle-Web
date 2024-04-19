@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import UniswapCompare from "./Uniswap/UniswapCompare";
 
 interface conditionObject {
-  name: string | undefined;
+  title: string | undefined;
   token: string | undefined;
   conditionSign: string | undefined;
   referencePoint: number | undefined;
@@ -19,7 +19,10 @@ const ConditionsTabs: React.FC<{
   const [selectedSigns, setSelectedSigns] = useState<string>(">");
   const [amount, setAmount] = useState<number>(0);
   const [isCondition, setIsCondition] = useState<boolean>(false);
-  const [isUniswapCompareSelected, setIsUniswapCompareSelected] = useState<boolean>(false);
+  const [isConditionSaved, setIsConditionSaved] =
+    React.useState<boolean>(false);
+  const [isUniswapCompareSelected, setIsUniswapCompareSelected] =
+    useState<boolean>(false);
 
   const tabs = [
     { label: "Check data source (ChainLink)" },
@@ -57,12 +60,15 @@ const ConditionsTabs: React.FC<{
 
   const handleUniswapCreate = () => {
     const condition: conditionObject = {
-      name: "uniswapCompare",
+      title: "uniswapSwap",
       token: selectedAssets,
       conditionSign: selectedSigns,
       referencePoint: amount,
     };
     onConditionNameChange(condition);
+    if (condition) {
+      setIsConditionSaved(true);
+    }
   };
 
   return (
@@ -92,7 +98,9 @@ const ConditionsTabs: React.FC<{
               value="uniswapCompare"
               className="mb-3 mr-2 h-5 w-5"
               onChange={handleCombinedChange}
-              onClick={() => setIsUniswapCompareSelected(!isUniswapCompareSelected)}
+              onClick={() =>
+                setIsUniswapCompareSelected(!isUniswapCompareSelected)
+              }
               checked={isUniswapCompareSelected}
             />
             <label htmlFor="uniswapCompare" className="bundle-text-smaller">
@@ -102,7 +110,7 @@ const ConditionsTabs: React.FC<{
               This condition will allow you to compare the prices of two assets
               using Chainlink.
             </p>
-            <select
+            {/* <select
               id="tokenSelect"
               value={selectedAssets}
               onChange={handleTokenSelectChange}
@@ -133,8 +141,19 @@ const ConditionsTabs: React.FC<{
             ></input>
             <button type="button" onClick={handleUniswapCreate}>
               Run
-            </button>
-            {isUniswapCompareSelected && <UniswapCompare />}
+            </button> */}
+            {isUniswapCompareSelected && (
+              <UniswapCompare
+                onSelectedAssets={selectedAssets}
+                onTokenSelectChange={handleTokenSelectChange}
+                selectedSigns={selectedSigns}
+                onSignSelectChange={handleSignSelectChange}
+                amount={amount}
+                onAmountChange={handleAmountChange}
+                onSetCondition={handleUniswapCreate}
+                isConditionSaved={isConditionSaved}
+              />
+            )}
           </div>
           {/* Check volume of NFT project on OpenSea */}
           <div id="opensea" className="mt-4 bg-gray-200 rounded-lg w-full p-6">
@@ -153,7 +172,7 @@ const ConditionsTabs: React.FC<{
               Check volume of NFT project on OpenSea
             </label>
             <p className="text-gray-400">
-              This condition will allow to check the amount of daily, weekly, or 
+              This condition will allow to check the amount of daily, weekly, or
               monthly volume of a project on OpenSea.
             </p>
           </div>
@@ -174,8 +193,8 @@ const ConditionsTabs: React.FC<{
               Check events from Smart Contract
             </label>
             <p className="text-gray-400">
-              This condition will allow you to monitor events from the 
-              smart contract of your choice.
+              This condition will allow you to monitor events from the smart
+              contract of your choice.
             </p>
           </div>
         </div>
@@ -196,8 +215,8 @@ const ConditionsTabs: React.FC<{
               Check for amout of asset in a wallet
             </label>
             <p>
-              This condition will allow you to check if an asset is present in your 
-              wallet, and if so, how much of that asset you have.
+              This condition will allow you to check if an asset is present in
+              your wallet, and if so, how much of that asset you have.
             </p>
           </div>
           {/* Check presence of NFT in wallet */}
@@ -217,7 +236,8 @@ const ConditionsTabs: React.FC<{
               Check for presence of NFT in wallet
             </label>
             <p className="text-gray-400">
-              This condition will check your wallet to see if you hold a particular NFT
+              This condition will check your wallet to see if you hold a
+              particular NFT
             </p>
           </div>
           {/* Check for transactions in wallet */}

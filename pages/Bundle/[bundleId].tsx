@@ -8,7 +8,7 @@ import SingleERC721 from "../components/NFTs/SingleERC721";
 import UniswapComparisonStatus from "../components/Uniswap/UniswapComparisonStatus";
 import NFTMinted from "../components/NFTs/NFTMinted";
 
-import { useReadContract } from "wagmi";
+import { useReadContract, useChainId } from "wagmi";
 import abi from "../utils/aggregatorV3InterfaceABI.abi.json";
 import bundleAbi from "../utils/Bundle.abi.json";
 
@@ -47,6 +47,7 @@ export interface Bundle {
 const RunBundlePage: React.FC = () => {
   const router = useRouter();
   const { bundleId } = router.query;
+  const formattedBundleId = Number(bundleId);
   const { bundles } = useBundles();
   const [bundle, setBundle] = React.useState<any>(null);
   const [price, setPrice] = React.useState<any>(0);
@@ -85,14 +86,13 @@ const RunBundlePage: React.FC = () => {
       .replace(",", "."); // Adjust locale formatting as needed
   }
 
-  React.useEffect(() => {
-    // Convert bundleId to a number
-    const idNum = Number(bundleId);
-    const foundBundle = bundles.find((bundle) => bundle.id === idNum);
-    setBundle(foundBundle ?? null);
-  }, [bundleId, bundles]);
+  // React.useEffect(() => {
+  //   // Convert bundleId to a number
+  //   const idNum = Number(bundleId);
+  //   const foundBundle = bundles.find((bundle) => bundle.id === idNum);
+  //   setBundle(foundBundle ?? null);
+  // }, [bundleId, bundles]);
 
-  //https://docs.chain.link/data-feeds/price-feeds/addresses?network=arbitrum&page=1
   const { data } = useReadContract({
     abi,
     functionName: "latestAnswer",
@@ -102,24 +102,26 @@ const RunBundlePage: React.FC = () => {
 
   const { data: ipfsUrl } = useReadContract({
     abi: bundleAbi,
-    functionName: "tokenUri",
+    functionName: "tokenURI",
     address: "0xb7403174d3325C3aD6B4576E10F85c2b63e68cF8",
-    args: [bundleId],
+    args: [formattedBundleId],
   });
 
   React.useEffect(() => {
-    if (ipfsUrl) {
-      callIpfs();
-    }
+    callIpfs();
   }, [ipfsUrl]);
 
   const callIpfs = async () => {
+    if (!ipfsUrl) {
+      console.error("IPFS URL is undefined or not valid:", ipfsUrl);
+      return;
+    }
     try {
-      const response = await fetch(
-        `https://sapphire-living-peafowl-558.mypinata.cloud/ipfs/${ipfsUrl}`
-      );
+      const response = await fetch(`${ipfsUrl}`);
       const json = await response.json();
       console.log(json);
+      setBundle(json);
+      // console.log(json);
     } catch (error) {
       console.error(error);
     }
@@ -206,30 +208,40 @@ const RunBundlePage: React.FC = () => {
       <hr className="mt-4 mb-6 md:my-8" />
       <div>{bundle.name}</div>
       <div>{bundle.description}</div>
-      {bundle.conditions.title === "uniswapCompare" ? (
-        <UniswapCompare />
+
+      {bundle.conditions.title === "uniswapSwap" ? (
+        <div className="mt-12">
+          <p className="italic">If bundle is a Uniswap Swap</p>
+          <div>Check Price ETH</div>
+          {data ? (
+            <div>{formatNumber(data)} USDC</div>
+          ) : (
+            <div>"Loading..."</div>
+          )}
+          {formatNumber(data) > bundle.conditions?.referencePoint ? (
+            <>
+              <UniswapComparisonStatus status="completed" bundle={bundle} />
+
+              <hr className="mt-4 mb-6 md:my-8 w-1/2" />
+              <UniswapSwap />
+            </>
+          ) : (
+            <UniswapComparisonStatus status="pending" bundle={bundle} />
+          )}
+        </div>
       ) : (
         <></>
       )}
-      {bundle.conditions.title === "uniswapSwap" ? <UniswapSwap /> : <></>}
-      <div>Check Price</div>
-      <div>{price}</div>
-      <button>Execute swap with USDC</button>
-
-      <div className="mt-12">
-        <p className="italic">If bundle is create NFT</p>
-        <SingleERC721 bundle={bundle} />
-        <hr className="mt-4 mb-6 md:my-8 w-1/2" />
-        <NFTMinted />
-      </div>
-      <hr className="mt-4 mb-6 md:my-8 w-1/2" />
-      <div className="mt-12">
-        <p className="italic">If bundle is a Uniswap Swap</p>
-        <UniswapComparisonStatus status="pending" />
-        <UniswapComparisonStatus status="completed" />
-        <hr className="mt-4 mb-6 md:my-8 w-1/2" />
-        <UniswapSwap />
-      </div>
+      {bundle.conditions.title === "nft" ? (
+        <div className="mt-12">
+          <p className="italic">If bundle is create NFT</p>
+          <SingleERC721 bundle={bundle} />
+          <hr className="mt-4 mb-6 md:my-8 w-1/2" />
+          <NFTMinted />
+        </div>
+      ) : (
+        <></>
+      )}
     </section>
   );
 };
