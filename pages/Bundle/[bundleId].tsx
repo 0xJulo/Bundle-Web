@@ -7,8 +7,9 @@ import UniswapSwap from "../components/Uniswap/UniswapSwap";
 import SingleERC721 from "../components/NFTs/SingleERC721";
 import UniswapComparisonStatus from "../components/Uniswap/UniswapComparisonStatus";
 import NFTMinted from "../components/NFTs/NFTMinted";
+import { sendAattestation } from "../utils/attestations";
 
-import { useReadContract, useChainId } from "wagmi";
+import { useReadContract, useAccount } from "wagmi";
 import abi from "../utils/aggregatorV3InterfaceABI.abi.json";
 import bundleAbi from "../utils/Bundle.abi.json";
 
@@ -46,14 +47,17 @@ export interface Bundle {
 
 const RunBundlePage: React.FC = () => {
   const router = useRouter();
+  const { address } = useAccount();
+  const [account, setAccount] = React.useState<`0x${string}`>("0x");
+  const [isAttestationInProgress, setIsAttestationInProgress] =
+    React.useState<boolean>(false);
+  const [attestationReceipt, setAttestationReceipt] = React.useState<any>();
   const { bundleId } = router.query;
   const formattedBundleId = Number(bundleId);
   const { bundles } = useBundles();
   const [bundle, setBundle] = React.useState<any>(null);
-  const [price, setPrice] = React.useState<any>(0);
   const [like, setLike] = React.useState<boolean>(false);
   const [dislike, setDislike] = React.useState<boolean>(false);
-
   const goBack = () => router.back();
 
   // const handleLike = () => {
@@ -112,6 +116,12 @@ const RunBundlePage: React.FC = () => {
     callIpfs();
   }, [ipfsUrl]);
 
+  React.useEffect(() => {
+    if (address) {
+      setAccount(address);
+    }
+  }, [address]);
+
   const callIpfs = async () => {
     if (!ipfsUrl) {
       console.error("IPFS URL is undefined or not valid:", ipfsUrl);
@@ -152,12 +162,27 @@ const RunBundlePage: React.FC = () => {
         <div className="flex space-x-4">
           <div className="flex items-center">
             {like ? (
-              <button
-                className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
-                onClick={() => setLike(!like)}
-              >
-                <ThumbUpAltIcon className="text-white" />
-              </button>
+              <>
+                <button
+                  className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
+                  onClick={async () => {
+                    try {
+                      setIsAttestationInProgress(true);
+                      const tx = await sendAattestation(
+                        bundleId as string,
+                        account,
+                        true
+                      );
+                      setIsAttestationInProgress(false);
+                      setAttestationReceipt(tx);
+                    } catch (error) {
+                      setIsAttestationInProgress(false);
+                    }
+                  }}
+                >
+                  <ThumbUpAltIcon className="text-white" />
+                </button>
+              </>
             ) : (
               <button
                 className="rounded-full bg-white border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
@@ -168,6 +193,7 @@ const RunBundlePage: React.FC = () => {
             )}
             <p className="text-[#80BAA8] font-bold">204</p>
           </div>
+
           <div className="flex items-center">
             {dislike ? (
               <button
@@ -204,6 +230,24 @@ const RunBundlePage: React.FC = () => {
             </a>
           </p>
         </div>
+      </div>
+      <div>
+        {" "}
+        {isAttestationInProgress ? "Sending..." : <></>}
+        {attestationReceipt ? (
+          <div>
+            <a
+              href={`https://sepolia.etherscan.io/tx/${attestationReceipt.txHash}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:text-blue-700"
+            >
+              Attestation sent! Check tx hash
+            </a>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       {bundle.conditions.title === "uniswapSwap" ? (
