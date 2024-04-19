@@ -14,6 +14,10 @@ const config: HardhatUserConfig = {
       chainId: 421614,
       accounts: [process.env.PRIVATE_KEY || ""],
     },
+    gnosisChiado: {
+      url: "https://rpc.chiadochain.net",
+      accounts: [process.env.PRIVATE_KEY || ""],
+    },
   },
 
   etherscan: {
