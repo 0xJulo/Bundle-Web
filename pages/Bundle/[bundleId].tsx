@@ -165,6 +165,7 @@ const RunBundlePage: React.FC = () => {
               <>
                 <button
                   className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
+                  type="button"
                   onClick={async () => {
                     try {
                       setIsAttestationInProgress(true);
@@ -186,7 +187,21 @@ const RunBundlePage: React.FC = () => {
             ) : (
               <button
                 className="rounded-full bg-white border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
-                onClick={() => setLike(!like)}
+                type="button"
+                onClick={async () => {
+                  try {
+                    setIsAttestationInProgress(true);
+                    const tx = await sendAattestation(
+                      bundleId as string,
+                      account,
+                      true
+                    );
+                    setIsAttestationInProgress(false);
+                    setAttestationReceipt(tx);
+                  } catch (error) {
+                    setIsAttestationInProgress(false);
+                  }
+                }}
               >
                 <ThumbUpAltIcon className="text-[#80BAA8]" />
               </button>
@@ -198,14 +213,42 @@ const RunBundlePage: React.FC = () => {
             {dislike ? (
               <button
                 className="rounded-full bg-[#80BAA8] border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
-                onClick={() => setDislike(!dislike)}
+                type="button"
+                onClick={async () => {
+                  try {
+                    setIsAttestationInProgress(true);
+                    const tx = await sendAattestation(
+                      bundleId as string,
+                      account,
+                      false
+                    );
+                    setIsAttestationInProgress(false);
+                    setAttestationReceipt(tx);
+                  } catch (error) {
+                    setIsAttestationInProgress(false);
+                  }
+                }}
               >
                 <ThumbDownAltIcon className="text-white" />
               </button>
             ) : (
               <button
                 className="rounded-full bg-white border-[1px] border-[#80BAA8] p-2 w-11 h-11 mr-2"
-                onClick={() => setDislike(!dislike)}
+                type="button"
+                onClick={async () => {
+                  try {
+                    setIsAttestationInProgress(true);
+                    const tx = await sendAattestation(
+                      bundleId as string,
+                      account,
+                      false
+                    );
+                    setIsAttestationInProgress(false);
+                    setAttestationReceipt(tx);
+                  } catch (error) {
+                    setIsAttestationInProgress(false);
+                  }
+                }}
               >
                 <ThumbDownAltIcon className="text-[#80BAA8]" />
               </button>
