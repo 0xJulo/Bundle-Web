@@ -1,7 +1,12 @@
 import React from "react";
 import { Bundle } from "../../utils/ExampleDataStore";
 import abi from "../../utils/CreateNFT.abi.json";
-import { useWriteContract, useAccount } from "wagmi";
+import {
+  useWriteContract,
+  useWaitForTransactionReceipt,
+  useAccount,
+} from "wagmi";
+import NFTMinted from "./NFTMinted";
 
 interface SingleERC721Props {
   bundle: Bundle;
@@ -12,6 +17,10 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
   const [description, setDescription] = React.useState<string>("");
   const { address } = useAccount();
   const { data: hash, error, isPending, writeContract } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      hash,
+    });
 
   const pinTokenURI = async (data: any): Promise<string> => {
     //setIpfsImageLoading(true);
@@ -41,20 +50,6 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
       return Promise.reject(error);
     }
   };
-
-  const mint = (tokenURI: string) => {
-    console.log(tokenURI);
-    writeContract({
-      address: "0xb7403174d3325C3aD6B4576E10F85c2b63e68cF8",
-      abi,
-      functionName: "safeMint",
-      args: [address, tokenURI],
-    });
-  };
-
-  React.useEffect(() => {
-    console.log(error);
-  }, [error]);
 
   // Function for creating the NFT
   const handleSubmit = async () => {
@@ -160,6 +155,14 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
           {isPending ? "Confirming..." : "Mint"}
         </button>
         {hash && <div>Transaction Hash: {hash}</div>}
+        {isConfirming && <div>Waiting for confirmation...</div>}
+        {isConfirmed && (
+          <div>
+            {" "}
+            <hr className="mt-4 mb-6 md:my-8 w-1/2" />
+            <NFTMinted />
+          </div>
+        )}
       </div>
     </section>
   );

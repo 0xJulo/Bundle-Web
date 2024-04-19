@@ -6,7 +6,7 @@ import UniswapCompare from "../components/Uniswap/UniswapCompare";
 import UniswapSwap from "../components/Uniswap/UniswapSwap";
 import SingleERC721 from "../components/NFTs/SingleERC721";
 import UniswapComparisonStatus from "../components/Uniswap/UniswapComparisonStatus";
-import NFTMinted from "../components/NFTs/NFTMinted";
+
 import { sendAattestation } from "../utils/attestations";
 
 import { useReadContract, useAccount } from "wagmi";
@@ -324,8 +324,6 @@ const RunBundlePage: React.FC = () => {
         <div className="mt-12">
           <p className="italic">If bundle is create NFT</p>
           <SingleERC721 bundle={bundle} />
-          <hr className="mt-4 mb-6 md:my-8 w-1/2" />
-          <NFTMinted />
         </div>
       ) : (
         <></>
