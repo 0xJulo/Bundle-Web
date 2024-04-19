@@ -3,10 +3,10 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 // Example data for bundles
 const ExampleBundles: Bundle[] = [
   {
-    id: 1,
-    name: "Swap asset on Uniswap when price is reached",
+    id: "1",
+    name: "(Example) Swap asset on Uniswap when price is reached",
     type: "My Bundles",
-    createdBy: "Bundle",
+    createdBy: "Bundle (Example Bundle)",
     description:
       "Set a condition for a price to be reached and swap assets from your wallet",
     tags: ["defi", "swap"],
@@ -34,7 +34,7 @@ const ExampleBundles: Bundle[] = [
   },
   {
     id: 2,
-    name: "Bridge to Gnosis Pay from other network",
+    name: "(Example) Bridge to Gnosis Pay from other network",
     type: "Saved",
     createdBy: "Bundle",
     description:
@@ -59,7 +59,7 @@ const ExampleBundles: Bundle[] = [
   },
   {
     id: 3,
-    name: "Create Woop Fundraiser",
+    name: "(Example) Create Woop Fundraiser",
     type: "Saved",
     createdBy: "Bundle",
     description: "Use Woop pay to create a fundraier",
@@ -82,7 +82,7 @@ const ExampleBundles: Bundle[] = [
   },
   {
     id: 4,
-    name: "Arbitrum Airdrop",
+    name: "(Example) Arbitrum Airdrop",
     type: "Popular",
     createdBy: "Bundle",
     description: "Check if you're eligible for Arbitrum airdrop",
@@ -105,7 +105,7 @@ const ExampleBundles: Bundle[] = [
   },
   {
     id: 5,
-    name: "Create single NFT and deploy to chain of your choice",
+    name: "(Example) Create single NFT and deploy to chain of your choice",
     type: "Pre-defined",
     createdBy: "Bundle",
     description:

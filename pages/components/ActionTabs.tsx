@@ -54,7 +54,7 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                             htmlFor='uniswapSwap'
                             className='bundle-text-smaller'
                         >
-                            Swap two assets on Uniswap
+                            Swap two assets on CoW Swap
                         </label>
                         <p>
                             This action will ask for the two tokens that you wish to swap, along with how much

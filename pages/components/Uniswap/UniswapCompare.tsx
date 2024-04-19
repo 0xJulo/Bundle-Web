@@ -26,19 +26,12 @@ const UniswapCompare: React.FC<{
       <form>
         {/* When */}
         <div className="mb-5 flex flex-wrap md:flex-nowrap items-end">
-          <div className="w-1/3">
-            <label htmlFor="nftName" className="bundle-text-smaller">
+          <div className="">
+          </div>
+          <div className="flex items-center w-full mt-4 md:mt-0 ">
+          <label htmlFor="nftName" className="bundle-text-smaller mr-4">
               When
             </label>
-            {/* <input
-              type="number"
-              name="nftName"
-              id="nftName"
-              className="mt-2 md:mt-4 block w-full h-12 p-2 rounded-md border-[#80BAA8] border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter amount"
-            /> */}
-          </div>
-          <div className="w-2/3 mt-4 md:mt-0 md:ml-4">
             <select
               id="networkSelect"
               name="networkSelect"
@@ -78,7 +71,7 @@ const UniswapCompare: React.FC<{
         </div>
 
         {/* Than*/}
-        <div className="mb-8 flex flex-wrap md:flex-nowrap items-end">
+        <div className="mb-8 flex flex-wrap md:flex-nowrap items-center">
           <div className="w-1/3">
             <input
               type="number"
@@ -123,3 +116,12 @@ const UniswapCompare: React.FC<{
 };
 
 export default UniswapCompare;
+
+
+{/* <input
+              type="number"
+              name="nftName"
+              id="nftName"
+              className="mt-2 md:mt-4 block w-full h-12 p-2 rounded-md border-[#80BAA8] border-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              placeholder="Enter amount"
+            /> */}
