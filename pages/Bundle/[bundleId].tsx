@@ -113,7 +113,12 @@ const RunBundlePage: React.FC = () => {
   });
 
   React.useEffect(() => {
-    callIpfs();
+    if (Number(bundleId) > 5) {
+      callIpfs();
+    } else {
+      const foundBundle = bundles.find((bundle) => bundle.id === bundleId);
+      setBundle(foundBundle ?? null);
+    }
   }, [ipfsUrl]);
 
   React.useEffect(() => {
@@ -293,9 +298,8 @@ const RunBundlePage: React.FC = () => {
         )}
       </div>
 
-      {bundle.conditions.title === "uniswapSwap" ? (
+      {bundle.conditions?.title === "uniswapSwap" ? (
         <div className="mt-12">
-          <p className="italic">If bundle is a Uniswap Swap</p>
           <div>Check Price ETH</div>
           {data ? (
             <div>{formatNumber(data)} USDC</div>
@@ -316,7 +320,7 @@ const RunBundlePage: React.FC = () => {
       ) : (
         <></>
       )}
-      {bundle.conditions.title === "nft" ? (
+      {bundle.actions.title === "createNFT" ? (
         <div className="mt-12">
           <p className="italic">If bundle is create NFT</p>
           <SingleERC721 bundle={bundle} />

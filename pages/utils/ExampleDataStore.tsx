@@ -10,122 +10,103 @@ const ExampleBundles: Bundle[] = [
     description:
       "Set a condition for a price to be reached and swap assets from your wallet",
     tags: ["defi", "swap"],
-    conditions: [
-      {
-        id: 1,
-        title: "uniswapCompare",
-        status: false,
-      },
-      {
-        id: 2,
-        title: "If",
-        status: false,
-      },
-    ],
-    actions: [
-      {
-        id: 1,
-        title: "uniswapSwap",
-        type: "transaction",
-        source: "external",
-      },
-    ],
+    conditions: {
+      title: "uniswapSwap",
+      token: "ETH",
+      conditionSign: ">",
+      referencePoint: 3150,
+    },
+    actions: {
+      id: 1,
+      title: "Send a...",
+      type: "transaction",
+      source: "external",
+    },
     route: "/screens/CreateUniswapSwapPage",
   },
   {
-    id: 2,
+    id: "2",
     name: "(Example) Bridge to Gnosis Pay from other network",
     type: "Saved",
     createdBy: "Bundle",
     description:
       "Take assets from another chain and bridge to Gnosis to get funds on Gnosis Pay account",
     tags: ["defi", "bridge"],
-    conditions: [
-      {
-        id: 1,
-        title: "Check for...",
-        status: false,
-      },
-    ],
-    actions: [
-      {
-        id: 1,
-        title: "Send a...",
-        type: "transaction",
-        source: "external",
-      },
-    ],
+    conditions: {
+      title: "",
+      token: "",
+      conditionSign: "",
+      referencePoint: 0,
+    },
+    actions: {
+      id: 1,
+      title: "Send a...",
+      type: "transaction",
+      source: "external",
+    },
     route: "/screens/BridgeArbGnosisPage",
   },
   {
-    id: 3,
+    id: "3",
     name: "(Example) Create Woop Fundraiser",
     type: "Saved",
     createdBy: "Bundle",
     description: "Use Woop pay to create a fundraier",
     tags: ["defi", "fundraiser"],
-    conditions: [
-      {
-        id: 1,
-        title: "Check for...",
-        status: false,
-      },
-    ],
-    actions: [
-      {
-        id: 1,
-        title: "Send a...",
-        type: "transaction",
-        source: "external",
-      },
-    ],
+    conditions: {
+      title: "",
+      token: "",
+      conditionSign: "",
+      referencePoint: 0,
+    },
+    actions: {
+      id: 1,
+      title: "Send a...",
+      type: "transaction",
+      source: "external",
+    },
   },
   {
-    id: 4,
+    id: "4",
     name: "(Example) Arbitrum Airdrop",
     type: "Popular",
     createdBy: "Bundle",
     description: "Check if you're eligible for Arbitrum airdrop",
     tags: ["arbitrum", "airdrop"],
-    conditions: [
-      {
-        id: 1,
-        title: "Check for...",
-        status: false,
-      },
-    ],
-    actions: [
-      {
-        id: 1,
-        title: "Send a...",
-        type: "transaction",
-        source: "external",
-      },
-    ],
+    conditions: {
+      title: "",
+      token: "",
+      conditionSign: "",
+      referencePoint: 0,
+    },
+    actions: {
+      id: 1,
+      title: "Send a...",
+      type: "transaction",
+      source: "external",
+    },
   },
   {
-    id: 5,
+    id: "5",
     name: "(Example) Create single NFT and deploy to chain of your choice",
     type: "Pre-defined",
     createdBy: "Bundle",
     description:
       "Mint a singular NFT asset (ERC-721) to the network of your choice, initially setting ownership to your own wallet.",
     tags: ["nft", "art", "music"],
-    conditions: [
-      {
-        id: 1,
-        title: "Check for...",
-        status: false,
-      },
-    ],
-    actions: [
-      {
-        id: 1,
-        title: "Send a...",
-        type: "transaction",
-        source: "external",
-      },
-    ],
+    conditions: {
+      title: "",
+      token: "",
+      conditionSign: "",
+      referencePoint: 0,
+    },
+    actions: {
+      id: 1,
+      title: "createNFT",
+      type: "transaction",
+      source: "external",
+    },
+
     route: "/screens/CreateNFTPage",
   },
 ];
@@ -146,12 +127,12 @@ export interface Bundle {
   description: string;
   tags?: string[];
   conditions: conditionObject | undefined;
-  actions: Array<{
+  actions: {
     id: number;
     title: string;
     type: string;
     source: string;
-  }>;
+  };
   route?: string;
 }
 

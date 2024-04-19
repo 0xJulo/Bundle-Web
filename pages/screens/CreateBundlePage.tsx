@@ -95,15 +95,14 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       createdBy: owner as string,
       description: bundleDescription,
       conditions: conditionName,
-      actions: [
-        {
-          id: 1, // ID within the actions array
-          title: actionName,
-          type: "Your Action Type",
-          source: "Your Action Source",
-        },
-        // Add more actions as needed
-      ],
+      actions: {
+        id: 1, // ID within the actions array
+        title: actionName,
+        type: "Your Action Type",
+        source: "Your Action Source",
+      },
+      // Add more actions as needed
+
       // route is optional, include it if needed
       route: "",
     };
