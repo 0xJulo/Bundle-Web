@@ -18,12 +18,12 @@ const params: CowSwapWidgetParams = {
   tradeType: TradeType.SWAP, // TradeType.SWAP, TradeType.LIMIT or TradeType.ADVANCED
   sell: {
     // Sell token. Optionally add amount for sell orders
-    asset: "USDC",
-    amount: "100000",
+    asset: "ETH",
+    amount: "1",
   },
   buy: {
     // Buy token. Optionally add amount for buy orders
-    asset: "COW",
+    asset: "USDC",
     amount: "0",
   },
   enabledTradeTypes: [
