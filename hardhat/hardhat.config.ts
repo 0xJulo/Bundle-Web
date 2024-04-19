@@ -5,6 +5,10 @@ import "@nomicfoundation/hardhat-toolbox-viem";
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
   networks: {
+    sepolia: {
+      url: process.env.INFURA_URL,
+      accounts: [process.env.PRIVATE_KEY || ""],
+    },
     arbitrumSepolia: {
       url: "https://sepolia-rollup.arbitrum.io/rpc",
       chainId: 421614,
@@ -15,6 +19,7 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       arbitrumSepolia: process.env.ARBISCAN_PRIVATE_KEY || "",
+      sepolia: process.env.ETHERSCAN_PRIVATE_KEY || "",
     },
     customChains: [
       {

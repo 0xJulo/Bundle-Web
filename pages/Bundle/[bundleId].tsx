@@ -72,6 +72,8 @@ const RunBundlePage: React.FC = () => {
 
   function formatNumber(bigNumber: any) {
     // Ensure the divisor is also a BigInt
+    console.log(bigNumber);
+    bigNumber = BigInt(bigNumber);
     const divisor = BigInt(100000000); // Same scale factor, but as BigInt
 
     // Use BigInt division, then convert the result to a Number for formatting
@@ -86,19 +88,18 @@ const RunBundlePage: React.FC = () => {
       .replace(",", "."); // Adjust locale formatting as needed
   }
 
-  // React.useEffect(() => {
-  //   // Convert bundleId to a number
-  //   const idNum = Number(bundleId);
-  //   const foundBundle = bundles.find((bundle) => bundle.id === idNum);
-  //   setBundle(foundBundle ?? null);
-  // }, [bundleId, bundles]);
-
-  const { data } = useReadContract({
+  const { data, error } = useReadContract({
     abi,
     functionName: "latestAnswer",
     // ETH/USD
-    address: "0xd30e2101a97dcbAeBCBC04F14C3f624E67A35165",
+    address: "0x694AA1769357215DE4FAC081bf1f309aDC325306",
   });
+
+  React.useEffect(() => {
+    if (error) {
+      console.error("Error fetching contract data:", error);
+    }
+  }, [error]);
 
   const { data: ipfsUrl } = useReadContract({
     abi: bundleAbi,
@@ -204,10 +205,6 @@ const RunBundlePage: React.FC = () => {
           </p>
         </div>
       </div>
-
-      <hr className="mt-4 mb-6 md:my-8" />
-      <div>{bundle.name}</div>
-      <div>{bundle.description}</div>
 
       {bundle.conditions.title === "uniswapSwap" ? (
         <div className="mt-12">
