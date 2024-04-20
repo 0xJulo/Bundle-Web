@@ -60,19 +60,6 @@ const RunBundlePage: React.FC = () => {
   const [dislike, setDislike] = React.useState<boolean>(false);
   const goBack = () => router.back();
 
-  // const handleLike = () => {
-  //   if (like) {
-  //     setLike(!like);
-  //     setDislike(false);
-  //   }
-  // };
-
-  // const handleDislike = () => {
-  //   if (dislike) {
-  //     setDislike(!dislike);
-  //     setLike(true); // Assuming you want to toggle like when dislike is toggled off, otherwise adjust logic as needed
-  //   }
-  // };
 
   function formatNumber(bigNumber: any) {
     // Ensure the divisor is also a BigInt

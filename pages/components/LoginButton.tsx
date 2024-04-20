@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 // Icon imports
 import Wallet from "@mui/icons-material/Wallet";
@@ -102,7 +103,7 @@ const LoginButton: React.FC = () => {
                           }}
                         >
                           {chain.iconUrl && (
-                            <img
+                            <Image
                               alt={chain.name ?? "Chain icon"}
                               src={chain.iconUrl}
                               style={{ width: 12, height: 12 }}
