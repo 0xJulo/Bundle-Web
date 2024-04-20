@@ -61,7 +61,7 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
 
     const tokenURI = await pinTokenURI(nftData);
     writeContract({
-      address: "0x7c6F3e985497344cbA9BdFF98d23663f989d47a3",
+      address: "0x3C6176AB5Ff9891D176D9887e913149B6aCE0A52",
       abi,
       functionName: "safeMint",
       args: [address, tokenURI],

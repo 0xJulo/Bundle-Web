@@ -12,7 +12,7 @@ contract CreateNFT is ERC721, ERC721URIStorage, Ownable {
         address initialOwner
     ) ERC721("NFT_Bundle", "NFTB") Ownable(initialOwner) {}
 
-    function safeMint(address to, string memory uri) public onlyOwner {
+    function safeMint(address to, string memory uri) public {
         uint256 tokenId = _nextTokenId++;
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
