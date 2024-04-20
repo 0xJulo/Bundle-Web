@@ -66,49 +66,49 @@ const ExampleBundles: Bundle[] = [
       source: "external",
     },
   },
-  {
-    id: "4",
-    name: "(Example) Arbitrum Airdrop",
-    type: "Popular",
-    createdBy: "Bundle",
-    description: "Check if you're eligible for Arbitrum airdrop",
-    tags: ["arbitrum", "airdrop"],
-    conditions: {
-      title: "",
-      token: "",
-      conditionSign: "",
-      referencePoint: 0,
-    },
-    actions: {
-      id: 1,
-      title: "Send a...",
-      type: "transaction",
-      source: "external",
-    },
-  },
-  {
-    id: "5",
-    name: "(Example) Create single NFT and deploy to chain of your choice",
-    type: "Pre-defined",
-    createdBy: "Bundle",
-    description:
-      "Mint a singular NFT asset (ERC-721) to the network of your choice, initially setting ownership to your own wallet.",
-    tags: ["nft", "art", "music"],
-    conditions: {
-      title: "",
-      token: "",
-      conditionSign: "",
-      referencePoint: 0,
-    },
-    actions: {
-      id: 1,
-      title: "createNFT",
-      type: "transaction",
-      source: "external",
-    },
+  // {
+  //   id: "4",
+  //   name: "(Example) Arbitrum Airdrop",
+  //   type: "Popular",
+  //   createdBy: "Bundle",
+  //   description: "Check if you're eligible for Arbitrum airdrop",
+  //   tags: ["arbitrum", "airdrop"],
+  //   conditions: {
+  //     title: "",
+  //     token: "",
+  //     conditionSign: "",
+  //     referencePoint: 0,
+  //   },
+  //   actions: {
+  //     id: 1,
+  //     title: "Send a...",
+  //     type: "transaction",
+  //     source: "external",
+  //   },
+  // },
+  // {
+  //   id: "5",
+  //   name: "(Example) Create single NFT and deploy to chain of your choice",
+  //   type: "Pre-defined",
+  //   createdBy: "Bundle",
+  //   description:
+  //     "Mint a singular NFT asset (ERC-721) to the network of your choice, initially setting ownership to your own wallet.",
+  //   tags: ["nft", "art", "music"],
+  //   conditions: {
+  //     title: "",
+  //     token: "",
+  //     conditionSign: "",
+  //     referencePoint: 0,
+  //   },
+  //   actions: {
+  //     id: 1,
+  //     title: "createNFT",
+  //     type: "transaction",
+  //     source: "external",
+  //   },
 
-    route: "/screens/CreateNFTPage",
-  },
+  //   route: "/screens/CreateNFTPage",
+  // },
 ];
 
 interface conditionObject {
