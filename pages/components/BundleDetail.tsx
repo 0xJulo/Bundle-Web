@@ -40,7 +40,7 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
           <p className=" w-[95%]">{bundle.description}</p>
         </div>
         <div className="mt-4">
-          <Button label="View Bundle" onClick={() => {}} bundleId={bundle.id} />
+          <Button label="View Bundle" onClick={() => {}} bundleId={parseInt(bundle.id, 10)} />
         </div>
       </div>
     </div>
