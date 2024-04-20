@@ -1,12 +1,12 @@
 'use client';
 import React, { useState } from 'react';
-import ExampleBundles, { Bundle } from '../utils/ExampleDataStore';
+import ExampleBundles, { Bundle } from '../../utils/ExampleDataStore';
 
 // Component imports
-import BundleDetail from '../components/BundleDetail';
-import SearchBar from '../components/SearchBar';
-import DashboardTabs from '../components/DashboardTabs';
-import CreateBundleButton from '../components/CreateBundleButton';
+import BundleDetail from '../../components/BundleDetail';
+import SearchBar from '../../components/SearchBar';
+import DashboardTabs from '../../components/DashboardTabs';
+import CreateBundleButton from '../../components/CreateBundleButton';
 
 interface DashboardPageProps {
     handleCreateNewBundle: () => void;

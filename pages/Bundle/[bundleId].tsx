@@ -1,17 +1,17 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useBundles } from "../utils/ExampleDataStore";
+import { useBundles } from "../../utils/ExampleDataStore";
 
-import UniswapCompare from "../components/Uniswap/UniswapCompare";
-import UniswapSwap from "../components/Uniswap/UniswapSwap";
-import SingleERC721 from "../components/NFTs/SingleERC721";
-import UniswapComparisonStatus from "../components/Uniswap/UniswapComparisonStatus";
+import UniswapCompare from "../../components/Uniswap/UniswapCompare";
+import UniswapSwap from "../../components/Uniswap/UniswapSwap";
+import SingleERC721 from "../../components/NFTs/SingleERC721";
+import UniswapComparisonStatus from "../../components/Uniswap/UniswapComparisonStatus";
 
-import { sendAattestation } from "../utils/attestations";
+import { sendAattestation } from "../../utils/attestations";
 
 import { useReadContract, useAccount } from "wagmi";
-import abi from "../utils/aggregatorV3InterfaceABI.abi.json";
-import bundleAbi from "../utils/Bundle.abi.json";
+import abi from "../../utils/aggregatorV3InterfaceABI.abi.json";
+import bundleAbi from "../../utils/Bundle.abi.json";
 
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Button from "./Button";
 
 // Data imports
-import ExampleBundles, { Bundle } from "../utils/ExampleDataStore";
+import { Bundle } from "../utils/ExampleDataStore";
 
 interface BundleDetailProps {
   bundle: Bundle;
@@ -48,38 +48,3 @@ const BundleDetail: React.FC<BundleDetailProps> = ({ bundle }) => {
 };
 
 export default BundleDetail;
-
-{
-  /* {isOpened && (
-                <div>
-                    <div className='p-3'>
-                        <p>{bundle.owner}</p>
-                        <h3>Start condition</h3>
-                        <p>{bundle.trigger.title}</p>
-                    </div>
-
-                    <div className='p-3'>
-                        <h3>Conditions</h3>
-                        {bundle.conditions.map((condition, index) => (
-                            <div key={index}>
-                                <p>{condition.title}</p>
-                                <p>Type: {condition.type}</p>
-                                <p>Source: {condition.source}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className='p-3'>
-                        <h3>Actions</h3>
-                        {bundle.actions.map((action, index) => (
-                            <div key={index}>
-                                <p>
-                                    {action.title} {action.type}
-                                </p>
-                                <p>Source: {action.source}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )} */
-}

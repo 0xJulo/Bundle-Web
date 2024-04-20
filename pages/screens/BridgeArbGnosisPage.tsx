@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import ExampleBundles from '../utils/ExampleDataStore';
-import { createNFT } from '../utils/CreateNFT';
+import ExampleBundles from '../../utils/ExampleDataStore';
+import { createNFT } from '../../utils/CreateNFT';
 
 
 // You'll remove this eventually and create a go back

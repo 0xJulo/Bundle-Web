@@ -7,12 +7,12 @@ import {
   useAccount,
   type BaseError,
 } from "wagmi";
-import abi from "../utils/Bundle.abi.json";
-import { Bundle, useBundles } from "../utils/ExampleDataStore";
+import abi from "../../utils/Bundle.abi.json";
+import { Bundle, useBundles } from "../../utils/ExampleDataStore";
 
 // Component imports
-import ConditionTabs from "../components/ConditionsTabs";
-import ActionTabs from "../components/ActionTabs";
+import ConditionTabs from "../../components/ConditionsTabs";
+import ActionTabs from "../../components/ActionTabs";
 
 interface CreateBundleScreenProps {
   handleCreateNewBundle: () => void;

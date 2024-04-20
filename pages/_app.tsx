@@ -1,9 +1,9 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import type { AppProps } from "next/app";
-import { BundlesProvider } from "./utils/ExampleDataStore";
+import { BundlesProvider } from "../utils/ExampleDataStore";
 import "./globals.css";
-import SideMenu from "./components/SideMenu";
-import Header from "./components/Header";
+import SideMenu from "../components/SideMenu";
+import Header from "../components/Header";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
