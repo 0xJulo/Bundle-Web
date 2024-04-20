@@ -103,7 +103,7 @@ const LoginButton: React.FC = () => {
                           }}
                         >
                           {chain.iconUrl && (
-                            <Image
+                            <img
                               alt={chain.name ?? "Chain icon"}
                               src={chain.iconUrl}
                               style={{ width: 12, height: 12 }}
