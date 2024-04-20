@@ -147,10 +147,10 @@ const RunBundlePage: React.FC = () => {
     return (
       <>
         {" "}
-        <div>Bundle not found</div>
-        <div>Check Price ETH</div>
-        {data ? <div>{formatNumber(data)} USDC</div> : <div>"Loading..."</div>}
-        <button>Execute swap with USDC</button>
+        <div>Loading Bundle</div>
+        {/* <div>Check Price ETH</div>
+        {data ? <div>{formatNumber(data)} USDC</div> : <div>"Loading..."</div>} */}
+        {/* <button>Execute swap with USDC</button> */}
       </>
     );
   }

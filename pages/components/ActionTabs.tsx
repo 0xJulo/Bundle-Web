@@ -174,13 +174,14 @@ const ActionTabs: React.FC<{ onActionNameChange: (name: string) => void }> = ({
                     >
                         <input
                             type='radio'
-                            id='condition'
-                            name='condition'
-                            value='condition'
+                            id='createNFT'
+                            name='createNFT'
+                            value='createNFT'
                             className='mb-3 mr-2 h-5 w-5'
+                            onChange={handleNameChange}
                         />
                         <label
-                            htmlFor='condition'
+                            htmlFor='createNFT'
                             className='bundle-text-smaller'
                         >
                             Create single ERC-721 NFT

@@ -258,13 +258,13 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
                     disabled
                     className="bg-gray-200 text-gray-400 font-bold py-2 px-4 rounded"
                   >
-                    Add another &apos;and&apos; condition
+                    Add another 'and' condition
                   </button>
                   <button
                     disabled
                     className="bg-gray-200 text-gray-400 font-bold py-2 px-4 rounded"
                   >
-                    Add an &apos;or&apos; condition
+                    Add an 'or' condition
                   </button>
                 </div>
               </>
@@ -338,7 +338,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
       )}
       <hr className="my-8" />
       {/* Bundle Structure code */}
-      {/* <div className="py-12">
+      <div className="py-12">
         <h2>Constructor Details</h2>
         <p>id: need to sort generating unique ids</p>
         <p>Bundle name: {bundleName}</p>
@@ -347,7 +347,7 @@ const CreateBundleScreen: React.FC<CreateBundleScreenProps> = ({
         <p>Bundle description: {bundleDescription}</p>
         <p>Condition: {conditionName?.title}</p>
         <p>Action: {actionName}</p>
-      </div> */}
+      </div> 
     </section>
   );
 };
