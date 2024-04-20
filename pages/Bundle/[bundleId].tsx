@@ -309,7 +309,7 @@ const RunBundlePage: React.FC = () => {
       )}
       {bundle.actions.title === "createNFT" ? (
         <div className="mt-12">
-          <p className="italic">If bundle is create NFT</p>
+          {/* <p className="italic">If bundle is create NFT</p> */}
           <SingleERC721 bundle={bundle} />
         </div>
       ) : (

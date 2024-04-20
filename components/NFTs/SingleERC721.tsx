@@ -70,7 +70,7 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
 
   return (
     <section>
-      <div className="mb-8">
+      {/* <div className="mb-8">
         <a
           href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol"
           target="_blank"
@@ -79,7 +79,7 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
         >
           View OpenZeppelin ERC721 Contract (opens in new tab)
         </a>
-      </div>
+      </div> */}
 
       {/* Form for creating the NFT */}
       <div className="md:w-1/2">
@@ -114,7 +114,7 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
         </div>
 
         {/* gas cost */}
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <div>
             <h3 className="mb-3 bundle-text">Gas cost:</h3>
             <div>
@@ -142,7 +142,7 @@ const SingleERC721: React.FC<SingleERC721Props> = ({ bundle }) => {
               <label htmlFor="low">Low ($0.58)</label>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Submit button */}
         <button
